@@ -39,14 +39,17 @@ DEFAULT_MODE = "camera"
 
 client = genai.Client(
     http_options={"api_version": "v1beta"},
-    api_key=os.environ.get("GEMINI_API_KEY"),
+    api_key='',
 )
+
+def Give_Sample():
+    print("You opened a hatch that deposits one sample.")
 
 tools = [
     types.Tool(
         function_declarations=[
             types.FunctionDeclaration(
-                name="Give Sample",
+                name="Give_Sample",
                 description="By calling this function, you open a hatch that deposits one sample."
             ),
         ]
