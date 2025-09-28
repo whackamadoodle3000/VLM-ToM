@@ -55,7 +55,7 @@ client = genai.Client(api_key=api_key, http_options={"api_version": "v1alpha"})
 
 def Give_Sample():
     """Dummy function for the tool call."""
-    DEBUG_PRINT("Executing tool: Give_Sample\n\n____________________\n\n")
+    DEBUG_PRINT("Executing tool: Give_Sample")
     return {"status": "Sample delivered successfully", "item": "nut bar", 'name': 'done'}
 
 tools = [
@@ -130,10 +130,10 @@ class AudioLoop:
         self.last_frame_gray = None
         self.motion_pixel_threshold = 25
         self.motion_trigger_ratio = 0.02
-        self.motion_cooldown = 0.5
+        self.motion_cooldown = 5.0
         self.last_motion_event_time = 0.0
         self.last_proactive_prompt_time = 0.0
-        self.proactive_prompt_cooldown = 0.5
+        self.proactive_prompt_cooldown = 15.0
         
         if WEBRTC_AVAILABLE:
             self.frame_duration_ms = 30
@@ -157,15 +157,8 @@ class AudioLoop:
         prompt_text = f"[Operator Guidance] {text}"
         DEBUG_PRINT(f"Triggering proactive prompt: {prompt_text}")
         try:
-            await self.session.send_client_content(
-                turns={
-                    "parts": [
-                        {
-                            "text": prompt_text
-                        }
-                    ]
-                }
-            )
+            content = types.Content(role="system", parts=[types.Part(text=prompt_text)])
+            await self.session.send_client_content(turns=[content])
         except Exception as e:
             DEBUG_PRINT(f"Failed to send proactive prompt: {e}")
 
@@ -283,12 +276,7 @@ class AudioLoop:
                         await self.out_queue.put(blob)
                         self.last_video_send = time.time()
                     if motion_detected:
-                        DEBUG_PRINT("Motion detected in frame. Triggering proactive prompt.")
-                        asyncio.create_task(
-                            self.trigger_proactive_prompt(
-                                "Motion observed near the counter by generic image motion detector. See if there are people. Evaluate what to do, depending on if you have been in conversation with this person, haven't seen this person, see a new person that you might want to greet, see someone definitely isn't interested, etc. If there is a person that looks like they may want to engage with you and hasn't said anything yet, you should greet them. All decisions for actions or responses or decisions to not say anything at this particular moment should be based of of CONVERSATIONAL CONTEXT and what you think the intent of any people you know, see, or don't see are"
-                            )
-                        )
+                        DEBUG_PRINT("Motion detected in frame (proactive prompt disabled).")
             await asyncio.sleep(0.1)
 
         cap.release()
