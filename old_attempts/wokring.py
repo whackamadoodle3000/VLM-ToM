@@ -104,7 +104,7 @@ class AudioLoop:
         # WebRTC VAD setup
         self.vad = None
         if WEBRTC_AVAILABLE:
-            self.vad = webrtcvad.Vad(2)  # Slightly more sensitive to speech
+            self.vad = webrtcvad.Vad(1)  # Mode 1 is a good balance of sensitivity
             DEBUG_PRINT("WebRTC VAD initialized.")
         
         # Echo prevention state
@@ -114,10 +114,7 @@ class AudioLoop:
         
         # Timers for continuous data sending
         self.last_video_send = 0
-        self.base_video_send_interval = 5.0  # ~0.2 FPS when idle
-        self.active_video_send_interval = 1.0  # ~1 FPS shortly after motion
-        self.motion_state_decay = 3.0  # seconds staying in active mode after motion
-        self.video_send_interval = self.base_video_send_interval
+        self.video_send_interval = 0.66  # send frames roughly ~1.5 FPS
         self.last_audio_send = 0
         self.ambient_audio_interval = 1.0  # How often to send ambient sound
         self.speaking_audio_interval = 0.3  # How often to send audio when someone is talking
@@ -291,16 +288,12 @@ class AudioLoop:
                         await self.out_queue.put(blob)
                         self.last_video_send = time.time()
                     if motion_detected:
-                        self.last_motion_event_time = time.time()
-                        self.video_send_interval = self.active_video_send_interval
                         DEBUG_PRINT("Motion detected in frame. Triggering proactive prompt.")
                         asyncio.create_task(
                             self.trigger_proactive_prompt(
                                 "Motion observed near the counter by generic image motion detector. See if there are people. Evaluate what to do, depending on if you have been in conversation with this person, haven't seen this person, see a new person that you might want to greet, see someone definitely isn't interested, etc. If there is a person that looks like they may want to engage with you and hasn't said anything yet, you should greet them. All decisions for actions or responses or decisions to not say anything at this particular moment should be based of of CONVERSATIONAL CONTEXT and what you think the intent of any people you know, see, or don't see are"
                             )
                         )
-                    elif (time.time() - self.last_motion_event_time) > self.motion_state_decay:
-                        self.video_send_interval = self.base_video_send_interval
             await asyncio.sleep(0.05)
 
         cap.release()
