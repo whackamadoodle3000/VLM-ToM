@@ -16,6 +16,8 @@ import argparse
 
 from google import genai
 from google.genai import types
+from face_reid import FaceReID
+
 
 # --- DEBUG FLAG ---
 # Set to True to enable detailed logging, False to disable.
@@ -47,11 +49,11 @@ MODEL = "gemini-2.5-flash-native-audio-preview-09-2025"
 DEFAULT_MODE = "camera"
 
 # It's better practice to handle API key errors gracefully
-api_key = os.getenv('GEMINI_API_KEY')
-if not api_key:
-    raise ValueError("GEMINI_API_KEY environment variable not set.")
+#api_key = os.getenv('GEMINI_API_KEY')
+#if not api_key:
+    #raise ValueError("GEMINI_API_KEY environment variable not set.")
 
-client = genai.Client(api_key=api_key, http_options={"api_version": "v1alpha"})
+client = genai.Client(api_key="", http_options={"api_version": "v1alpha"})
 
 def Give_Sample():
     """Dummy function for the tool call."""
@@ -137,6 +139,8 @@ class AudioLoop:
         self.last_motion_event_time = 0.0
         self.last_proactive_prompt_time = 0.0
         self.proactive_prompt_cooldown = 0.25
+
+        self.reid = FaceReID(max_age_s=600, match_threshold=0.42)  # 10 min memory window
         
         if WEBRTC_AVAILABLE:
             self.frame_duration_ms = 30
@@ -236,13 +240,32 @@ class AudioLoop:
                 break
         DEBUG_PRINT("send_text task finished.")
 
+    def _choose_focus_pid(self, reid_results, width, height):
+        if not reid_results:
+            self.current_focus_pid = None
+            return
+        cx0, cy0 = width / 2.0, height / 2.0
+        best_pid, best_d = None, 1e18
+        for r in reid_results:
+            x1, y1, x2, y2 = r["bbox"]
+            cx, cy = (x1 + x2) / 2.0, (y1 + y2) / 2.0
+            d = (cx - cx0) ** 2 + (cy - cy0) ** 2
+            if d < best_d:
+                best_d, best_pid = d, r["pid"]
+        self.current_focus_pid = best_pid
+
     def _get_frame(self, cap, detect_motion=False):
-        """Helper to capture and process one camera frame."""
+        """Helper to capture and process one camera frame.
+        Returns: (blob, motion_detected, guidance_text)
+        """
         ret, frame = cap.read()
         if not ret:
-            return (None, False) if detect_motion else None
-        
+            return (None, False, None) if detect_motion else (None, None, None)
+
         motion_detected = False
+        guidance_msgs = []
+
+        # --- Motion detection (thread-safe; no asyncio here) ---
         if detect_motion:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             gray = cv2.GaussianBlur(gray, (21, 21), 0)
@@ -256,55 +279,104 @@ class AudioLoop:
                 if motion_ratio > self.motion_trigger_ratio and (time.time() - self.last_motion_event_time) > self.motion_cooldown:
                     motion_detected = True
                     self.last_motion_event_time = time.time()
+                    # don't schedule here—collect a message to return
+                    guidance_msgs.append(
+                        "Motion observed near the counter by generic image motion detector. "
+                        "See if there are people. Evaluate what to do depending on conversational context."
+                    )
                 self.last_frame_gray = gray
 
+        # --- ReID & focus selection (full-frame pipeline) ---
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        H, W = frame.shape[:2]
+        reid_results = self.reid.process_frame(frame_rgb)
+        self._choose_focus_pid(reid_results, W, H)
+
+        # Compose internal guidance based on ReID state
+        interesting = []
+        for r in reid_results:
+            pid = r["pid"]
+            if r["served"]:
+                interesting.append(f"Person #{pid} appears already served.")
+            else:
+                person = self.reid.people.get(pid, {})
+                if person.get("seen_count", 0) == 1:
+                    interesting.append(f"New person near counter: #{pid}.")
+
+        if interesting:
+            guidance_msgs.append(
+                " ".join(interesting) + " Greet those who seem interested; avoid offering duplicates."
+            )
+
+        # --- Optional debug drawing (local only) ---
+        for r in reid_results:
+            x1, y1, x2, y2 = r["bbox"]
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            label = f"ID:{r['pid']}{'✓' if r['served'] else ''}"
+            cv2.putText(frame, label, (x1, max(0, y1 - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+
+
+
+        # --- Encode & return ---
         img = PIL.Image.fromarray(frame_rgb)
         img.thumbnail([600, 338])
-
         with io.BytesIO() as image_io:
             img.save(image_io, format="jpeg", quality=80)
             blob = types.Blob(mime_type="image/jpeg", data=image_io.getvalue())
-            return (blob, motion_detected) if detect_motion else blob
+
+        guidance_text = " ".join(guidance_msgs) if guidance_msgs else None
+        return (blob, motion_detected, guidance_text) if detect_motion else (blob, None, guidance_text)
+
 
     async def get_frames(self):
-        """Task to periodically capture camera frames."""
+        """Task to periodically capture camera frames (schedules prompts on main loop)."""
         DEBUG_PRINT("Starting get_frames (camera) task.")
         cap = await asyncio.to_thread(cv2.VideoCapture, 0)
         if not cap.isOpened():
             DEBUG_PRINT("Error: Could not open camera.")
             self.running = False
             return
-        
+
+        # optional warm-up reads
+        for _ in range(5):
+            ok, _ = cap.read()
+            if ok:
+                break
+            await asyncio.sleep(0.05)
+
         while self.running:
             if time.time() - self.last_video_send >= self.video_send_interval:
                 DEBUG_PRINT("Capturing camera frame.")
-                frame_result = await asyncio.to_thread(self._get_frame, cap, True)
-                if frame_result:
-                    blob, motion_detected = frame_result
-                    if blob:
-                        if self.out_queue.full():
-                            try:
-                                _ = self.out_queue.get_nowait()
-                            except asyncio.QueueEmpty:
-                                pass
-                        await self.out_queue.put(blob)
-                        self.last_video_send = time.time()
-                    if motion_detected:
-                        self.last_motion_event_time = time.time()
-                        self.video_send_interval = self.active_video_send_interval
-                        DEBUG_PRINT("Motion detected in frame. Triggering proactive prompt.")
-                        asyncio.create_task(
-                            self.trigger_proactive_prompt(
-                                "Motion observed near the counter by generic image motion detector. See if there are people. Evaluate what to do, depending on if you have been in conversation with this person, haven't seen this person, see a new person that you might want to greet, see someone definitely isn't interested, etc. If there is a person that looks like they may want to engage with you and hasn't said anything yet, you should greet them. All decisions for actions or responses or decisions to not say anything at this particular moment should be based of of CONVERSATIONAL CONTEXT and what you think the intent of any people you know, see, or don't see are"
-                            )
-                        )
-                    elif (time.time() - self.last_motion_event_time) > self.motion_state_decay:
-                        self.video_send_interval = self.base_video_send_interval
+                blob, motion_detected, guidance_text = await asyncio.to_thread(self._get_frame, cap, True)
+
+                if blob:
+                    if self.out_queue.full():
+                        try:
+                            _ = self.out_queue.get_nowait()
+                        except asyncio.QueueEmpty:
+                            pass
+                    await self.out_queue.put(blob)
+                    self.last_video_send = time.time()
+
+                if motion_detected:
+                    self.last_motion_event_time = time.time()
+                    self.video_send_interval = self.active_video_send_interval
+                elif (time.time() - self.last_motion_event_time) > self.motion_state_decay:
+                    self.video_send_interval = self.base_video_send_interval
+
+                # Schedule the proactive prompt here (on the real event loop)
+                if guidance_text and (time.time() - self.last_proactive_prompt_time) > self.proactive_prompt_cooldown:
+                    asyncio.create_task(self.trigger_proactive_prompt(guidance_text))
+
             await asyncio.sleep(0.05)
 
         cap.release()
+        try:
+            cv2.destroyAllWindows()
+        except Exception:
+            pass
         DEBUG_PRINT("get_frames (camera) task finished.")
+
 
     def _get_screen(self):
         """Helper to capture and process one screen grab."""
@@ -433,6 +505,18 @@ class AudioLoop:
                             DEBUG_PRINT(f"Model called tool: {fc.name} with ID: {fc.id}")
                             if fc.name == "Give_Sample":
                                 result = Give_Sample()
+                                # Pick person with highest seen_count in the last ~2s as the focus
+                                # Prefer the current focus; fallback to most-seen if no focus
+                                pid_to_mark = getattr(self, "current_focus_pid", None)
+                                if pid_to_mark is None and self.reid.people:
+                                    pid_to_mark = max(self.reid.people.items(), key=lambda kv: kv[1]["seen_count"])[0]
+
+                                if pid_to_mark is not None:
+                                    self.reid.mark_served(pid_to_mark)
+                                    DEBUG_PRINT(f"Marked person #{pid_to_mark} as served.")
+                                else:
+                                    DEBUG_PRINT("No focus PID available to mark as served.")
+
                                 fr = types.FunctionResponse(id=fc.id, name=fc.name, response=result)
                                 DEBUG_PRINT(f"Sending tool response for {fc.name}: {result}")
                                 await self.session.send_tool_response(function_responses=[fr])
