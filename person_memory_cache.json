@@ -1,0 +1,231 @@
+{
+  "1": {
+    "pid": 1,
+    "first_seen": 1760417826.7265742,
+    "last_seen": 1760418256.306192,
+    "total_interactions": 46,
+    "served_count": 1,
+    "last_served": 1760418056.1748328,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760417826.726584,
+        "content": "Approaching counter"
+      },
+      {
+        "timestamp": 1760417870.040889,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760418056.1479921,
+        "content": "Requested sample"
+      }
+    ],
+    "state": "served"
+  },
+  "2": {
+    "pid": 2,
+    "first_seen": 1760417872.7555761,
+    "last_seen": 1760418105.663742,
+    "total_interactions": 3,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760417872.755581,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "3": {
+    "pid": 3,
+    "first_seen": 1760417874.080725,
+    "last_seen": 1760418115.297643,
+    "total_interactions": 23,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760417874.0807302,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "4": {
+    "pid": 4,
+    "first_seen": 1760418117.6916769,
+    "last_seen": 1760418239.549571,
+    "total_interactions": 26,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418117.69171,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "5": {
+    "pid": 5,
+    "first_seen": 1760418124.868462,
+    "last_seen": 1760418124.86917,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418124.868479,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "6": {
+    "pid": 6,
+    "first_seen": 1760418127.218647,
+    "last_seen": 1760418206.1581419,
+    "total_interactions": 9,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418127.218652,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "7": {
+    "pid": 7,
+    "first_seen": 1760418146.488498,
+    "last_seen": 1760418146.4892192,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418146.488512,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "8": {
+    "pid": 8,
+    "first_seen": 1760418148.866986,
+    "last_seen": 1760418148.867553,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418148.866997,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "9": {
+    "pid": 9,
+    "first_seen": 1760418165.870204,
+    "last_seen": 1760418168.1830468,
+    "total_interactions": 3,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418165.8702168,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "10": {
+    "pid": 10,
+    "first_seen": 1760418170.5687659,
+    "last_seen": 1760418170.5693681,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418170.568782,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "11": {
+    "pid": 11,
+    "first_seen": 1760418187.250701,
+    "last_seen": 1760418187.251796,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418187.2507179,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "12": {
+    "pid": 12,
+    "first_seen": 1760418239.548564,
+    "last_seen": 1760418239.5492532,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418239.548586,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "13": {
+    "pid": 13,
+    "first_seen": 1760418241.906049,
+    "last_seen": 1760418241.906829,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760418241.9060538,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  }
+}
