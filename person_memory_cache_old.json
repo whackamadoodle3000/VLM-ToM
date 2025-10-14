@@ -1,0 +1,187 @@
+{
+  "1": {
+    "pid": 1,
+    "first_seen": 1760471191.0140102,
+    "last_seen": 1760471348.240611,
+    "total_interactions": 55,
+    "served_count": 2,
+    "last_served": 1760471306.6671228,
+    "conversation_history": [],
+    "preferences": {
+      "dietary_restrictions": [
+        "nut allergy"
+      ]
+    },
+    "observations": [
+      {
+        "timestamp": 1760471191.014066,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760471203.7306821,
+        "content": "Requested a sample, received a nut bar sample."
+      },
+      {
+        "timestamp": 1760471218.6749609,
+        "content": "Stated they are allergic to nuts, cannot receive a nut bar sample."
+      },
+      {
+        "timestamp": 1760471279.6164548,
+        "content": "Requested a sample for his friend, but did not take one himself due to nut allergy."
+      },
+      {
+        "timestamp": 1760471305.962652,
+        "content": "Requested a sample for a second friend, did not take one himself due to nut allergy."
+      }
+    ],
+    "state": "served"
+  },
+  "2": {
+    "pid": 2,
+    "first_seen": 1760471228.733818,
+    "last_seen": 1760471318.18045,
+    "total_interactions": 3,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471228.73385,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "3": {
+    "pid": 3,
+    "first_seen": 1760471231.149601,
+    "last_seen": 1760471361.1345558,
+    "total_interactions": 26,
+    "served_count": 1,
+    "last_served": 1760471337.0767071,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471231.149674,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760471244.4590201,
+        "content": "Requested a sample, received a nut bar sample."
+      }
+    ],
+    "state": "served"
+  },
+  "4": {
+    "pid": 4,
+    "first_seen": 1760471251.555578,
+    "last_seen": 1760471258.193953,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471251.555614,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760471258.193954,
+        "content": "Requested a sample, received a nut bar sample."
+      }
+    ],
+    "state": "Received sample"
+  },
+  "5": {
+    "pid": 5,
+    "first_seen": 1760471318.181091,
+    "last_seen": 1760471323.299258,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471318.181123,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760471323.299258,
+        "content": "Requested a sample, received a nut bar sample."
+      }
+    ],
+    "state": "Received sample"
+  },
+  "6": {
+    "pid": 6,
+    "first_seen": 1760471325.402942,
+    "last_seen": 1760471325.40348,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471325.403014,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "7": {
+    "pid": 7,
+    "first_seen": 1760471327.8221061,
+    "last_seen": 1760471327.825679,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471327.822297,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "8": {
+    "pid": 8,
+    "first_seen": 1760471350.697715,
+    "last_seen": 1760471350.698122,
+    "total_interactions": 2,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471350.6977432,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  },
+  "9": {
+    "pid": 9,
+    "first_seen": 1760471353.460799,
+    "last_seen": 1760471361.1340532,
+    "total_interactions": 5,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760471353.460992,
+        "content": "First appearance at the counter"
+      }
+    ],
+    "state": "just_arrived"
+  }
+}

@@ -1,36 +1,122 @@
 {
   "1": {
     "pid": 1,
-    "first_seen": 1760469906.5220978,
-    "last_seen": 1760469971.547816,
-    "total_interactions": 21,
-    "served_count": 0,
-    "last_served": null,
-    "conversation_history": [],
+    "first_seen": 1760474885.558629,
+    "last_seen": 1760474943.978059,
+    "total_interactions": 16,
+    "served_count": 1,
+    "last_served": 1760474893.841563,
+    "conversation_history": [
+      {
+        "timestamp": 1760474887.570118,
+        "content": "User approached counter."
+      },
+      {
+        "timestamp": 1760474893.8762481,
+        "content": "User accepted sample offer and took one."
+      },
+      {
+        "timestamp": 1760474896.937566,
+        "content": "User accepted sample offer and took a sample."
+      }
+    ],
     "preferences": {},
     "observations": [
       {
-        "timestamp": 1760469906.522166,
+        "timestamp": 1760474885.558757,
         "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760474887.5701172,
+        "content": "Person approached the counter and was offered a sample."
+      },
+      {
+        "timestamp": 1760474893.876247,
+        "content": "Person took a nut bar sample."
+      },
+      {
+        "timestamp": 1760474896.9375648,
+        "content": "Person took a sample."
       }
     ],
-    "state": "just_arrived"
+    "state": "Received sample"
   },
   "2": {
     "pid": 2,
-    "first_seen": 1760469930.552327,
-    "last_seen": 1760469947.430679,
-    "total_interactions": 9,
+    "first_seen": 1760474906.3704588,
+    "last_seen": 1760474918.203244,
+    "total_interactions": 7,
     "served_count": 0,
     "last_served": null,
-    "conversation_history": [],
+    "conversation_history": [
+      {
+        "timestamp": 1760474908.250381,
+        "content": "User approached counter."
+      },
+      {
+        "timestamp": 1760474914.357441,
+        "content": "User accepted sample offer and took a sample."
+      }
+    ],
     "preferences": {},
     "observations": [
       {
-        "timestamp": 1760469930.552381,
+        "timestamp": 1760474906.370584,
         "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760474908.25038,
+        "content": "Person approached the counter and was offered a sample."
+      },
+      {
+        "timestamp": 1760474914.35744,
+        "content": "Person took a sample."
       }
     ],
-    "state": "just_arrived"
+    "state": "Received sample"
+  },
+  "3": {
+    "pid": 3,
+    "first_seen": 1760474920.516216,
+    "last_seen": 1760474941.670846,
+    "total_interactions": 10,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [
+      {
+        "timestamp": 1760474922.2224782,
+        "content": "User approached counter."
+      },
+      {
+        "timestamp": 1760474929.421361,
+        "content": "User accepted sample offer and took a sample."
+      },
+      {
+        "timestamp": 1760474938.268276,
+        "content": "User asked for another sample for their friend, mentioning the friend's name is Pranav. I informed the user that Pranav has already had a sample as per the policy."
+      }
+    ],
+    "preferences": {
+      "friend_name": "Pranav"
+    },
+    "observations": [
+      {
+        "timestamp": 1760474920.516337,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760474922.222477,
+        "content": "Person approached the counter and was offered a sample."
+      },
+      {
+        "timestamp": 1760474929.42136,
+        "content": "Person took a sample."
+      },
+      {
+        "timestamp": 1760474938.2682729,
+        "content": "User mentioned their friend's name is Pranav. User requested a sample for Pranav."
+      }
+    ],
+    "state": "Received sample"
   }
 }

@@ -172,6 +172,10 @@ class PersonMemoryCache:
         memory["last_seen"] = time.time()
         
         # Merge updates
+        DEBUG_PRINT(
+            f"Updating memory for person #{pid} with payload: {_convert_for_log(updates)}"
+        )
+        log_event("memory_update_request", person_id=pid, updates=updates)
         for key, value in updates.items():
             if key == "conversation_history" or key == "observations":
                 # Append to lists
@@ -327,11 +331,11 @@ class AudioLoop:
             {"function_declarations": [
                 {
                     "name": "Give_Sample",
-                    "description": "By calling this function, you open a hatch that deposits one sample to the person you're currently focused on."
+                    "description": "By calling this function, you open a hatch that deposits one sample to the person you're currently focused on, and they take the sample."
                 },
                 {
                     "name": "Update_Person_Memory",
-                    "description": "Update your memory about a person. Use this to record observations, preferences, or state changes.",
+                    "description": "Update your memory about a person. Use this to record observations, preferences, or state changes. Use this AS OFTEN AS POSSIBLE.",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -345,11 +349,15 @@ class AudioLoop:
                             },
                             "state": {
                                 "type": "string",
-                                "description": "Current state (e.g., 'interested', 'served', 'browsing', 'hesitant')"
+                                "description": "Inferred or stated intent of person"
+                            },
+                            "conversation": {
+                                "type": "string",
+                                "description": "Dialogue or summary to append to conversation history"
                             },
                             "preferences": {
                                 "type": "object",
-                                "description": "Any preferences mentioned (e.g., dietary restrictions, likes/dislikes)"
+                                "description": "Any preferences mentioned"
                             }
                         },
                         "required": ["person_id"]
@@ -376,15 +384,18 @@ class AudioLoop:
         DEBUG_PRINT(f"Triggering proactive prompt: {prompt_text}")
         log_event("proactive_prompt", prompt=prompt_text)
         try:
-            await self.session.send_client_content(
-                turns={
-                    "parts": [
-                        {
-                            "text": prompt_text
-                        }
-                    ]
-                }
+            turns_payload = {
+                "parts": [
+                    {
+                        "text": prompt_text
+                    }
+                ]
+            }
+            DEBUG_PRINT(
+                f"Sending client content to model (proactive): {json.dumps(turns_payload, ensure_ascii=False)}"
             )
+            log_event("llm_text_outbound", source="proactive_prompt", payload=turns_payload)
+            await self.session.send_client_content(turns=turns_payload)
         except Exception as e:
             DEBUG_PRINT(f"Failed to send proactive prompt: {e}")
 
@@ -440,15 +451,34 @@ class AudioLoop:
                     break
                 DEBUG_PRINT(f"Sending text to model: '{text}'")
                 log_event("user_text_input", text=text)
-                await self.session.send_client_content(
-                    turns={
-                        "parts": [
-                            {
-                                "text": text if text else "."
-                            }
-                        ]
-                    }
+                turns_payload = {
+                    "parts": [
+                        {
+                            "text": text if text else "."
+                        }
+                    ]
+                }
+                DEBUG_PRINT(
+                    f"Sending client content to model (user input): {json.dumps(turns_payload, ensure_ascii=False)}"
                 )
+                log_event("llm_text_outbound", source="user_input", payload=turns_payload)
+                await self.session.send_client_content(turns=turns_payload)
+
+                if self.current_focus_pid is not None and text.strip():
+                    convo_entry = f"User: {text.strip()}"
+                    DEBUG_PRINT(
+                        f"Recording user conversation entry for person #{self.current_focus_pid}: {convo_entry}"
+                    )
+                    log_event(
+                        "conversation_logged",
+                        person_id=self.current_focus_pid,
+                        role="user",
+                        text=text.strip(),
+                    )
+                    self.memory_cache.update_memory(
+                        self.current_focus_pid,
+                        {"conversation_history": convo_entry}
+                    )
             except EOFError:
                 break
         DEBUG_PRINT("send_text task finished.")
@@ -750,6 +780,22 @@ class AudioLoop:
                         DEBUG_PRINT(f"Received text from model: '{chunk.text}'")
                         log_event("model_text_received", text=chunk.text)
 
+                        if self.current_focus_pid is not None and chunk.text.strip():
+                            convo_entry = f"Assistant: {chunk.text.strip()}"
+                            DEBUG_PRINT(
+                                f"Recording assistant conversation entry for person #{self.current_focus_pid}: {convo_entry}"
+                            )
+                            log_event(
+                                "conversation_logged",
+                                person_id=self.current_focus_pid,
+                                role="assistant",
+                                text=chunk.text.strip(),
+                            )
+                            self.memory_cache.update_memory(
+                                self.current_focus_pid,
+                                {"conversation_history": convo_entry}
+                            )
+
                     if hasattr(chunk, "tool_call") and hasattr(chunk.tool_call, "function_calls"):
                         for fc in chunk.tool_call.function_calls:
                             print(f"\n[Tool Call]: {fc.name}")
@@ -774,6 +820,11 @@ class AudioLoop:
                                 args = json.loads(fc.args) if isinstance(fc.args, str) else fc.args
                                 pid = args.get("person_id")
                                 
+                                DEBUG_PRINT(
+                                    f"Update_Person_Memory tool called with args: {_convert_for_log(args)}"
+                                )
+                                log_event("memory_tool_invocation", name=fc.name, args=args)
+
                                 updates = {}
                                 if "observation" in args:
                                     updates["observations"] = args["observation"]
@@ -781,7 +832,23 @@ class AudioLoop:
                                     updates["state"] = args["state"]
                                 if "preferences" in args:
                                     updates["preferences"] = args["preferences"]
+                                if "conversation" in args:
+                                    updates["conversation_history"] = args["conversation"]
                                 
+                                missing_fields = [
+                                    field for field in ("observation", "state", "preferences")
+                                    if field not in args or args.get(field) in (None, "")
+                                ]
+                                if missing_fields:
+                                    DEBUG_PRINT(
+                                        f"Update_Person_Memory missing fields for person #{pid}: {missing_fields}"
+                                    )
+                                    log_event(
+                                        "memory_tool_missing_fields",
+                                        person_id=pid,
+                                        missing_fields=missing_fields,
+                                    )
+
                                 if pid and updates:
                                     self.memory_cache.update_memory(pid, updates)
                                     DEBUG_PRINT(f"Updated memory for person #{pid}: {updates}")
@@ -905,8 +972,8 @@ You will receive continuous audio and video feeds. Based on what you see and hea
 - The sample is a nut bar
 - Be friendly and conversational, but keep responses concise
 - You can see people even when they're not talking - feel free to initiate conversation!
-- Use the Update_Person_Memory tool to record observations, preferences, and state changes about people
-- When you observe something noteworthy about a person (interests, dietary needs, mood), update their memory
+- Use the Update_Person_Memory tool to record observations, preferences, and state changes about people. Do this as often as possible whenever you get or infer ANY new piece of information.
+- When you observe something noteworthy about a person, update their memory
 
 You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.""",
                 "tools": self.tools,
