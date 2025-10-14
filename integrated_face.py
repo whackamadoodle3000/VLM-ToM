@@ -5,6 +5,8 @@ import traceback
 import json
 import time
 import datetime
+import logging
+from logging.handlers import RotatingFileHandler
 
 import cv2
 import pyaudio
@@ -21,10 +23,64 @@ from face_reid import FaceReID
 # --- DEBUG FLAG ---
 DEBUG = True
 
-def DEBUG_PRINT(message):
+LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = os.path.join(
+    LOG_DIR, f"integrated_face_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+)
+
+
+def setup_logging():
+    logger = logging.getLogger("integrated_face")
+    logger.setLevel(logging.DEBUG if DEBUG else logging.INFO)
+    if logger.handlers:
+        return logger
+
+    formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+
+    file_handler = RotatingFileHandler(LOG_FILE, maxBytes=5 * 1024 * 1024, backupCount=3)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    logger.propagate = False
+    logger.debug("Logging initialized. Log file: %s", LOG_FILE)
+    return logger
+
+
+LOGGER = setup_logging()
+
+
+def DEBUG_PRINT(message, level=logging.DEBUG):
     """Helper function for debug printing with timestamps."""
-    if DEBUG:
-        print(f"[{datetime.datetime.now().isoformat()}] [DEBUG] {message}")
+    LOGGER.log(level, message)
+
+
+def _convert_for_log(value, depth=0):
+    if depth > 2:
+        return "<truncated>"
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+    if isinstance(value, bytes):
+        return {"type": "bytes", "length": len(value)}
+    if isinstance(value, (list, tuple)):
+        return [_convert_for_log(v, depth + 1) for v in value[:50]]
+    if isinstance(value, dict):
+        return {str(k): _convert_for_log(v, depth + 1) for k, v in list(value.items())[:50]}
+    if hasattr(value, "mime_type") and hasattr(value, "data"):
+        return {"type": "Blob", "mime_type": value.mime_type, "length": len(value.data)}
+    return str(value)
+
+
+def log_event(event_name, **details):
+    payload = {
+        "event": event_name,
+        "details": {k: _convert_for_log(v) for k, v in details.items()}
+    }
+    LOGGER.info("EVENT %s", json.dumps(payload, ensure_ascii=False))
 
 # Try to import WebRTC VAD
 try:
@@ -43,6 +99,7 @@ CHUNK_SIZE = 1024
 MODEL = "gemini-2.5-flash-native-audio-preview-09-2025"
 DEFAULT_MODE = "camera"
 MEMORY_CACHE_FILE = "person_memory_cache.json"
+RESET_MEMORY_ON_START = True
 
 client = genai.Client(api_key="", http_options={"api_version": "v1alpha"})
 
@@ -50,8 +107,16 @@ client = genai.Client(api_key="", http_options={"api_version": "v1alpha"})
 class PersonMemoryCache:
     """Persistent memory cache for storing information about each person."""
     
-    def __init__(self, cache_file=MEMORY_CACHE_FILE):
+    def __init__(self, cache_file=MEMORY_CACHE_FILE, reset_on_start=RESET_MEMORY_ON_START):
         self.cache_file = cache_file
+        if reset_on_start and os.path.exists(self.cache_file):
+            try:
+                os.remove(self.cache_file)
+                DEBUG_PRINT(f"Resetting memory cache file at startup: {self.cache_file}")
+                log_event("memory_cache_reset", cache_file=self.cache_file)
+            except Exception as e:
+                DEBUG_PRINT(f"Failed to reset memory cache: {e}")
+                log_event("memory_cache_reset_error", cache_file=self.cache_file, error=str(e))
         self.memories = {}  # pid -> memory dict
         self.load_cache()
     
@@ -62,11 +127,14 @@ class PersonMemoryCache:
                 with open(self.cache_file, 'r') as f:
                     self.memories = json.load(f)
                 DEBUG_PRINT(f"Loaded memory cache with {len(self.memories)} people.")
+                log_event("memory_cache_loaded", cache_file=self.cache_file, people=len(self.memories))
             except Exception as e:
                 DEBUG_PRINT(f"Error loading cache: {e}")
+                log_event("memory_cache_load_error", cache_file=self.cache_file, error=str(e))
                 self.memories = {}
         else:
             DEBUG_PRINT("No existing memory cache found. Starting fresh.")
+            log_event("memory_cache_not_found", cache_file=self.cache_file)
     
     def save_cache(self):
         """Save memory cache to disk."""
@@ -74,8 +142,10 @@ class PersonMemoryCache:
             with open(self.cache_file, 'w') as f:
                 json.dump(self.memories, f, indent=2)
             DEBUG_PRINT(f"Saved memory cache with {len(self.memories)} people.")
+            log_event("memory_cache_saved", cache_file=self.cache_file, people=len(self.memories))
         except Exception as e:
             DEBUG_PRINT(f"Error saving cache: {e}")
+            log_event("memory_cache_save_error", cache_file=self.cache_file, error=str(e))
     
     def get_memory(self, pid):
         """Get memory for a person ID."""
@@ -93,6 +163,7 @@ class PersonMemoryCache:
                 "observations": [],
                 "state": "unknown"  # e.g., "interested", "already_served", "just_arrived"
             }
+            log_event("memory_created", person_id=pid)
         return self.memories[pid_str]
     
     def update_memory(self, pid, updates):
@@ -116,6 +187,7 @@ class PersonMemoryCache:
                 memory[key] = value
         
         self.save_cache()
+        log_event("memory_updated", person_id=pid, updates=updates)
         return memory
     
     def format_memory_for_prompt(self, pid):
@@ -165,6 +237,7 @@ Current state: {memory["state"]}
 def Give_Sample(memory_cache, focus_pid):
     """Tool function for giving a sample."""
     DEBUG_PRINT(f"Executing tool: Give_Sample for person #{focus_pid}")
+    log_event("tool_called", tool="Give_Sample", focus_pid=focus_pid)
     
     if focus_pid:
         memory_cache.update_memory(focus_pid, {
@@ -172,6 +245,7 @@ def Give_Sample(memory_cache, focus_pid):
             "last_served": time.time(),
             "state": "served"
         })
+        log_event("sample_served", person_id=focus_pid)
     
     return {
         "status": "Sample delivered successfully",
@@ -187,6 +261,7 @@ pya = pyaudio.PyAudio()
 class AudioLoop:
     def __init__(self, video_mode=DEFAULT_MODE):
         DEBUG_PRINT(f"Initializing AudioLoop with video_mode: {video_mode}")
+        log_event("audio_loop_init", video_mode=video_mode)
         self.video_mode = video_mode
         self.audio_in_queue = None
         self.out_queue = None
@@ -194,6 +269,7 @@ class AudioLoop:
         self.audio_stream = None
         self.output_stream = None
         self.running = True
+        log_event("audio_loop_state", step="init_complete")
         
         # Memory cache
         self.memory_cache = PersonMemoryCache()
@@ -203,6 +279,7 @@ class AudioLoop:
         if WEBRTC_AVAILABLE:
             self.vad = webrtcvad.Vad(2)
             DEBUG_PRINT("WebRTC VAD initialized.")
+            log_event("vad_initialized", mode=2)
         
         # Echo prevention state
         self.is_ai_speaking = False
@@ -297,6 +374,7 @@ class AudioLoop:
         self.last_proactive_prompt_time = now
         prompt_text = f"[Operator Guidance] {text}"
         DEBUG_PRINT(f"Triggering proactive prompt: {prompt_text}")
+        log_event("proactive_prompt", prompt=prompt_text)
         try:
             await self.session.send_client_content(
                 turns={
@@ -357,9 +435,11 @@ class AudioLoop:
                 text = await asyncio.to_thread(input, "message > ")
                 if text.lower() == "q":
                     DEBUG_PRINT("User requested exit with 'q'.")
+                    log_event("user_exit_requested")
                     self.running = False
                     break
                 DEBUG_PRINT(f"Sending text to model: '{text}'")
+                log_event("user_text_input", text=text)
                 await self.session.send_client_content(
                     turns={
                         "parts": [
@@ -496,6 +576,7 @@ class AudioLoop:
                 blob, motion_detected, guidance_text = await asyncio.to_thread(self._get_frame, cap, True)
 
                 if blob:
+                    log_event("camera_frame_captured", size=len(blob.data))
                     if self.out_queue.full():
                         try:
                             _ = self.out_queue.get_nowait()
@@ -507,6 +588,7 @@ class AudioLoop:
                 if motion_detected:
                     self.last_motion_event_time = time.time()
                     self.video_send_interval = self.active_video_send_interval
+                    log_event("motion_detected")
                 elif (time.time() - self.last_motion_event_time) > self.motion_state_decay:
                     self.video_send_interval = self.base_video_send_interval
 
@@ -542,6 +624,7 @@ class AudioLoop:
                 DEBUG_PRINT("Capturing screen frame.")
                 blob = await asyncio.to_thread(self._get_screen)
                 if blob:
+                    log_event("screen_frame_captured", size=len(blob.data))
                     if self.out_queue.full():
                         try:
                             _ = self.out_queue.get_nowait()
@@ -560,14 +643,17 @@ class AudioLoop:
                 blob = await asyncio.wait_for(self.out_queue.get(), timeout=1.0)
                 if blob.mime_type.startswith("audio"):
                     DEBUG_PRINT(f"Sending audio data ({len(blob.data)} bytes).")
+                    log_event("audio_blob_sent", bytes=len(blob.data))
                     await self.session.send_realtime_input(audio=blob)
                 elif blob.mime_type.startswith("image"):
                     DEBUG_PRINT(f"Sending image data ({len(blob.data)} bytes).")
+                    log_event("image_blob_sent", bytes=len(blob.data))
                     await self.session.send_realtime_input(video=blob)
             except asyncio.TimeoutError:
                 continue
             except Exception as e:
                 DEBUG_PRINT(f"Error in send_realtime: {e}")
+                log_event("send_realtime_error", error=str(e))
         DEBUG_PRINT("send_realtime task finished.")
 
     async def listen_audio(self):
@@ -579,6 +665,7 @@ class AudioLoop:
             input=True, input_device_index=mic_info["index"], frames_per_buffer=CHUNK_SIZE
         )
         DEBUG_PRINT("Microphone stream opened.")
+        log_event("microphone_opened", device=mic_info.get("name"))
         
         audio_accumulator = bytearray()
         while self.running:
@@ -586,10 +673,19 @@ class AudioLoop:
                 data = await asyncio.to_thread(self.audio_stream.read, CHUNK_SIZE, False)
                 current_time = time.time()
                 can_send = not self.is_ai_speaking and (current_time - self.ai_stop_time > self.min_delay_after_ai)
+                log_event(
+                    "audio_chunk_read",
+                    bytes=len(data),
+                    can_send=can_send,
+                    ai_speaking=self.is_ai_speaking,
+                    delay_remaining=max(0.0, self.min_delay_after_ai - (current_time - self.ai_stop_time))
+                    if self.is_ai_speaking else 0.0
+                )
 
                 if not can_send:
                     if len(audio_accumulator) > 0:
                         DEBUG_PRINT("Dropping buffered audio while AI is speaking.")
+                        log_event("audio_dropped", reason="ai_speaking", bytes=len(audio_accumulator))
                     audio_accumulator.clear()
                     if WEBRTC_AVAILABLE and hasattr(self, "audio_buffer"):
                         self.audio_buffer.clear()
@@ -604,8 +700,10 @@ class AudioLoop:
                 if voice_detected and not self.is_person_speaking:
                     self.is_person_speaking = True
                     DEBUG_PRINT("Person started speaking.")
+                    log_event("person_speaking_state", state="started")
                     if len(audio_accumulator) >= self.min_send_bytes and can_send:
                         DEBUG_PRINT("Immediate send on speech start.")
+                        log_event("audio_blob_sent", bytes=len(audio_accumulator), trigger="speech_start")
                         await self.out_queue.put(types.Blob(data=bytes(audio_accumulator), mime_type=f"audio/pcm;rate={SEND_SAMPLE_RATE}"))
                         audio_accumulator.clear()
                         self.last_audio_send = current_time
@@ -613,8 +711,10 @@ class AudioLoop:
                 elif not voice_detected and self.is_person_speaking:
                     self.is_person_speaking = False
                     DEBUG_PRINT("Person stopped speaking.")
+                    log_event("person_speaking_state", state="stopped")
                     if len(audio_accumulator) > 0 and can_send:
                         DEBUG_PRINT("Sending final audio chunk.")
+                        log_event("audio_blob_sent", bytes=len(audio_accumulator), trigger="speech_end")
                         await self.out_queue.put(types.Blob(data=bytes(audio_accumulator), mime_type=f"audio/pcm;rate={SEND_SAMPLE_RATE}"))
                         audio_accumulator.clear()
                         self.last_audio_send = current_time
@@ -622,32 +722,39 @@ class AudioLoop:
                 send_interval = self.speaking_audio_interval if self.is_person_speaking else self.ambient_audio_interval
                 if current_time - self.last_audio_send >= send_interval and len(audio_accumulator) > 0 and can_send:
                     DEBUG_PRINT(f"Periodic send ({'speaking' if self.is_person_speaking else 'ambient'}).")
+                    log_event("audio_blob_sent", bytes=len(audio_accumulator), trigger="periodic")
                     await self.out_queue.put(types.Blob(data=bytes(audio_accumulator), mime_type=f"audio/pcm;rate={SEND_SAMPLE_RATE}"))
                     audio_accumulator.clear()
                     self.last_audio_send = current_time
                 
             except Exception as e:
                 DEBUG_PRINT(f"Error in listen_audio loop: {e}")
+                log_event("listen_audio_error", error=str(e))
         DEBUG_PRINT("listen_audio task finished.")
+        log_event("listen_audio_stopped")
 
     async def receive_audio(self):
         """Task to handle all incoming responses from the model."""
         DEBUG_PRINT("Starting receive_audio task.")
+        log_event("receive_audio_started")
         while self.running:
             try:
                 async for chunk in self.session.receive():
                     if hasattr(chunk, "data") and chunk.data:
                         DEBUG_PRINT(f"Received audio chunk: {len(chunk.data)} bytes")
                         await self.audio_in_queue.put(chunk.data)
+                        log_event("audio_chunk_received", bytes=len(chunk.data))
 
                     if hasattr(chunk, "text") and chunk.text:
                         print(f"\n[Assistant]: {chunk.text}")
                         DEBUG_PRINT(f"Received text from model: '{chunk.text}'")
+                        log_event("model_text_received", text=chunk.text)
 
                     if hasattr(chunk, "tool_call") and hasattr(chunk.tool_call, "function_calls"):
                         for fc in chunk.tool_call.function_calls:
                             print(f"\n[Tool Call]: {fc.name}")
                             DEBUG_PRINT(f"Model called tool: {fc.name} with ID: {fc.id}")
+                            log_event("model_tool_call", name=fc.name, call_id=fc.id, args=_convert_for_log(fc.args))
                             
                             if fc.name == "Give_Sample":
                                 result = Give_Sample(self.memory_cache, self.current_focus_pid)
@@ -656,9 +763,11 @@ class AudioLoop:
                                 if self.current_focus_pid is not None:
                                     self.reid.mark_served(self.current_focus_pid)
                                     DEBUG_PRINT(f"Marked person #{self.current_focus_pid} as served.")
+                                    log_event("person_marked_served", person_id=self.current_focus_pid)
                                 
                                 fr = types.FunctionResponse(id=fc.id, name=fc.name, response=result)
                                 DEBUG_PRINT(f"Sending tool response for {fc.name}: {result}")
+                                log_event("tool_response_sent", tool=fc.name, response=result)
                                 await self.session.send_tool_response(function_responses=[fr])
                             
                             elif fc.name == "Update_Person_Memory":
@@ -679,15 +788,19 @@ class AudioLoop:
                                 
                                 result = {"status": "Memory updated", "person_id": pid}
                                 fr = types.FunctionResponse(id=fc.id, name=fc.name, response=result)
+                                log_event("tool_response_sent", tool=fc.name, response=result)
                                 await self.session.send_tool_response(function_responses=[fr])
                             
             except Exception as e:
                 DEBUG_PRINT(f"Error in receive_audio: {e}")
+                log_event("receive_audio_error", error=str(e))
         DEBUG_PRINT("receive_audio task finished.")
+        log_event("receive_audio_stopped")
 
     async def play_audio(self):
         """Task to play audio received from the model."""
         DEBUG_PRINT("Starting play_audio task.")
+        log_event("play_audio_started")
         self.output_stream = await asyncio.to_thread(
             pya.open, format=FORMAT, channels=CHANNELS, rate=RECEIVE_SAMPLE_RATE,
             output=True, frames_per_buffer=CHUNK_SIZE * 4
@@ -704,6 +817,7 @@ class AudioLoop:
                 if not self.is_ai_speaking:
                     self.is_ai_speaking = True
                     DEBUG_PRINT("AI started speaking. Recording is paused.")
+                    log_event("ai_speaking_state", state="started")
                 
                 buffered.extend(bytestream)
 
@@ -714,6 +828,7 @@ class AudioLoop:
                         buffered.clear()
                     except Exception as e:
                         DEBUG_PRINT(f"Error writing to output stream: {e}")
+                        log_event("play_audio_error", error=str(e))
                         
             except asyncio.TimeoutError:
                 silence_count += 1
@@ -726,22 +841,27 @@ class AudioLoop:
                             buffered.clear()
                         except Exception as e:
                             DEBUG_PRINT(f"Error flushing output stream: {e}")
+                            log_event("play_audio_error", error=str(e))
                     
                     # Only mark as stopped after 2 consecutive timeouts (1 second)
                     if silence_count >= 2:
                         self.is_ai_speaking = False
                         self.ai_stop_time = time.time()
                         DEBUG_PRINT(f"AI stopped speaking. Recording will resume after {self.min_delay_after_ai}s delay.")
+                        log_event("ai_speaking_state", state="stopped", delay=self.min_delay_after_ai)
                         silence_count = 0
                         
             except Exception as e:
                 DEBUG_PRINT(f"Error in play_audio: {e}")
+                log_event("play_audio_error", error=str(e))
                 
         DEBUG_PRINT("play_audio task finished.")
+        log_event("play_audio_stopped")
 
     async def cleanup(self):
         """Clean up all resources."""
         DEBUG_PRINT("Starting cleanup.")
+        log_event("cleanup_started")
         self.running = False
         
         # Save memory cache one final time
@@ -751,16 +871,20 @@ class AudioLoop:
             self.audio_stream.stop_stream()
             self.audio_stream.close()
             DEBUG_PRINT("Input audio stream closed.")
+            log_event("microphone_closed")
         if self.output_stream and self.output_stream.is_active():
             self.output_stream.stop_stream()
             self.output_stream.close()
             DEBUG_PRINT("Output audio stream closed.")
+            log_event("output_stream_closed")
         DEBUG_PRINT("Cleanup finished.")
+        log_event("cleanup_finished")
 
     async def run(self):
         """Main execution function."""
         try:
             DEBUG_PRINT(f"Connecting to model: {MODEL}")
+            log_event("run_start", model=MODEL)
             
             CONFIG = {
                 "response_modalities": ["AUDIO"],
@@ -791,6 +915,7 @@ You may also receive messages tagged with [Operator Guidance] or [Person Memory]
             async with client.aio.live.connect(model=MODEL, config=CONFIG) as session, \
                        asyncio.TaskGroup() as tg:
                 DEBUG_PRINT("Model session started.")
+                log_event("model_session_started")
                 self.session = session
                 self.audio_in_queue = asyncio.Queue()
                 self.out_queue = asyncio.Queue(maxsize=50)
@@ -805,13 +930,23 @@ You may also receive messages tagged with [Operator Guidance] or [Person Memory]
                 tg.create_task(self.receive_audio())
                 tg.create_task(self.play_audio())
                 DEBUG_PRINT("All tasks created.")
+                log_event("tasks_started", tasks=[
+                    "send_text",
+                    "send_realtime",
+                    "listen_audio",
+                    "get_frames" if self.video_mode == "camera" else "get_screen" if self.video_mode == "screen" else "none",
+                    "receive_audio",
+                    "play_audio"
+                ])
         except Exception as e:
             DEBUG_PRINT(f"An exception occurred in run: {e}")
             traceback.print_exc()
+            log_event("run_error", error=str(e))
         finally:
             await self.cleanup()
             pya.terminate()
             DEBUG_PRINT("PyAudio terminated.")
+            log_event("run_finished")
 
 
 if __name__ == "__main__":
@@ -820,11 +955,14 @@ if __name__ == "__main__":
                         help="pixels to stream from", choices=["camera", "screen", "none"])
     args = parser.parse_args()
     main = AudioLoop(video_mode=args.mode)
+    log_event("main_started", mode=args.mode)
     
     try:
         DEBUG_PRINT("Starting application run loop.")
         asyncio.run(main.run())
     except KeyboardInterrupt:
         DEBUG_PRINT("KeyboardInterrupt received. Shutting down.")
+        log_event("keyboard_interrupt")
     finally:
         DEBUG_PRINT("Application finished.")
+        log_event("application_finished")

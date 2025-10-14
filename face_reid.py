@@ -4,6 +4,11 @@ import cv2
 from insightface.app import FaceAnalysis
 from scipy.spatial.distance import cdist
 
+
+def face_logger():
+    import logging
+    return logging.getLogger("integrated_face")
+
 class FaceReID:
     def __init__(self, max_age_s=300, match_threshold=0.42, min_size=80):
         # Person memory (temporary IDs)
@@ -104,8 +109,7 @@ class FaceReID:
                 "served": self.people[pid]["served"],
                 "similarity": float(sim) if sim is not None else None
             })
-        print("DETECTIONS")
-        print(detections)
+        face_logger().debug("FaceReID detections: %s", detections)
 
         return detections
 

@@ -1,0 +1,28 @@
+2025-10-14 15:14:52,812 [DEBUG] Logging initialized. Log file: /Users/pranavtadepalli/Documents/GitHub/VLM-ToM/logs/integrated_face_20251014_151452.log
+2025-10-14 15:14:53,253 [DEBUG] Initializing AudioLoop with video_mode: camera
+2025-10-14 15:14:53,253 [INFO] EVENT {"event": "audio_loop_init", "details": {"video_mode": "camera"}}
+2025-10-14 15:14:53,253 [INFO] EVENT {"event": "audio_loop_state", "details": {"step": "init_complete"}}
+2025-10-14 15:14:53,253 [DEBUG] Loaded memory cache with 13 people.
+2025-10-14 15:14:53,253 [INFO] EVENT {"event": "memory_cache_loaded", "details": {"cache_file": "person_memory_cache.json", "people": 13}}
+2025-10-14 15:14:53,254 [DEBUG] WebRTC VAD initialized.
+2025-10-14 15:14:53,254 [INFO] EVENT {"event": "vad_initialized", "details": {"mode": 2}}
+2025-10-14 15:14:54,466 [DEBUG] AudioLoop initialized successfully.
+2025-10-14 15:14:54,467 [INFO] EVENT {"event": "main_started", "details": {"mode": "camera"}}
+2025-10-14 15:14:54,467 [DEBUG] Starting application run loop.
+2025-10-14 15:14:54,468 [DEBUG] Connecting to model: gemini-2.5-flash-native-audio-preview-09-2025
+2025-10-14 15:14:54,468 [INFO] EVENT {"event": "run_start", "details": {"model": "gemini-2.5-flash-native-audio-preview-09-2025"}}
+2025-10-14 15:14:54,477 [DEBUG] An exception occurred in run: 1 validation error for LiveConnectConfig
+turn_context
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'include_timestamps': True}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+2025-10-14 15:14:54,487 [INFO] EVENT {"event": "run_error", "details": {"error": "1 validation error for LiveConnectConfig\nturn_context\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'include_timestamps': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden"}}
+2025-10-14 15:14:54,487 [DEBUG] Starting cleanup.
+2025-10-14 15:14:54,487 [INFO] EVENT {"event": "cleanup_started", "details": {}}
+2025-10-14 15:14:54,488 [DEBUG] Saved memory cache with 13 people.
+2025-10-14 15:14:54,488 [INFO] EVENT {"event": "memory_cache_saved", "details": {"cache_file": "person_memory_cache.json", "people": 13}}
+2025-10-14 15:14:54,489 [DEBUG] Cleanup finished.
+2025-10-14 15:14:54,489 [INFO] EVENT {"event": "cleanup_finished", "details": {}}
+2025-10-14 15:14:54,489 [DEBUG] PyAudio terminated.
+2025-10-14 15:14:54,489 [INFO] EVENT {"event": "run_finished", "details": {}}
+2025-10-14 15:14:54,489 [DEBUG] Application finished.
+2025-10-14 15:14:54,490 [INFO] EVENT {"event": "application_finished", "details": {}}
