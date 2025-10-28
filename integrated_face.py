@@ -193,8 +193,8 @@ class PersonMemoryCache:
         
         # Calculate time since last seen
         time_since_last = time.time() - memory["last_seen"]
-        if time_since_last < 60:
-            recency = "just now"
+        if time_since_last < 15:
+            recency = "You last saw them just now in this same interaction"
         elif time_since_last < 3600:
             recency = f"{int(time_since_last/60)} minutes ago"
         else:
@@ -325,7 +325,7 @@ class AudioLoop:
                 },
                 {
                     "name": "Update_Person_Memory",
-                    "description": "Update your memory about a person. Use this to record observations, preferences, or state changes. Any time you learn any new information about the person then use this tool. Use this AS OFTEN AS POSSIBLE.",
+                    "description": "Update your memory about a person. Use this to record observations, preferences, quotes of what the person said, or state changes. Any time you learn any information about the person, including what they said or what you did for said to them, then use this tool. Use this AS OFTEN AS POSSIBLE.",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -547,7 +547,7 @@ class AudioLoop:
             x1, y1, x2, y2 = r["bbox"]
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             memory = self.memory_cache.get_memory(r["pid"])
-            label = f"ID:{r['pid']} ({memory['state']})"
+            label = f"ID:{r['pid']}"
             cv2.putText(frame, label, (x1, max(0, y1 - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
         # Encode & return
@@ -926,6 +926,7 @@ You will receive continuous audio and video feeds. Based on what you see and hea
 - You have persistent memory of every person you interact with, including their ID number
 - Always reference your memory when you see someone - acknowledge if they've been here before
 - Each person should only get ONE sample per visit
+- No one has received samples before you started giving them out
 - The sample is a nut bar
 - Be friendly and conversational, but keep responses concise
 - You can see people even when they're not talking - feel free to initiate conversation!
