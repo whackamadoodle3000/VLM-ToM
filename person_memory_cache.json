@@ -1,30 +1,30 @@
 {
   "1": {
     "pid": 1,
-    "first_seen": 1761684588.6596081,
-    "last_seen": 1761684660.898867,
-    "total_interactions": 23,
+    "first_seen": 1761688446.6424162,
+    "last_seen": 1761688546.4974852,
+    "total_interactions": 31,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1761684588.659754,
+        "timestamp": 1761688446.642578,
         "content": "First appearance at the counter"
       },
       {
-        "timestamp": 1761684603.854157,
-        "content": "received a sample"
+        "timestamp": 1761688460.022389,
+        "content": "Requested a sample."
       }
     ]
   },
   "2": {
     "pid": 2,
-    "first_seen": 1761684656.539147,
-    "last_seen": 1761684660.9011781,
-    "total_interactions": 3,
+    "first_seen": 1761688482.7536252,
+    "last_seen": 1761688501.290863,
+    "total_interactions": 8,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1761684656.5393531,
+        "timestamp": 1761688482.753752,
         "content": "First appearance at the counter"
       }
     ]

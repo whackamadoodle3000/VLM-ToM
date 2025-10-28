@@ -358,7 +358,7 @@ class AudioLoop:
             return
 
         self.last_proactive_prompt_time = now
-        prompt_text = f"[Operator Guidance] {text}"
+        prompt_text = f"[Operator Guidance] [Make sure to update memory cache regularly with any new information ] {text}"
         DEBUG_PRINT(f"Triggering proactive prompt: {prompt_text}")
         log_event("proactive_prompt", prompt=prompt_text)
         try:
@@ -480,7 +480,7 @@ class AudioLoop:
         """Helper to capture and process one camera frame with memory integration."""
         ret, frame = cap.read()
         if not ret:
-            return (None, False, None) if detect_motion else (None, None, None)
+            return (None, False, None, None) if detect_motion else (None, None, None, None)
 
         motion_detected = False
         guidance_msgs = []
@@ -550,6 +550,8 @@ class AudioLoop:
             label = f"ID:{r['pid']}"
             cv2.putText(frame, label, (x1, max(0, y1 - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+        display_frame = frame.copy()
+
         # Encode & return
         img = PIL.Image.fromarray(frame_rgb)
         img.thumbnail([600, 338])
@@ -558,7 +560,10 @@ class AudioLoop:
             blob = types.Blob(mime_type="image/jpeg", data=image_io.getvalue())
 
         guidance_text = "\n".join(guidance_msgs) if guidance_msgs else None
-        return (blob, motion_detected, guidance_text) if detect_motion else (blob, None, guidance_text)
+        print(f"guidance_text: {guidance_text}")
+        if detect_motion:
+            return blob, motion_detected, guidance_text, display_frame
+        return blob, None, guidance_text, display_frame
 
     async def get_frames(self):
         """Task to periodically capture camera frames."""
@@ -578,7 +583,7 @@ class AudioLoop:
         while self.running:
             if time.time() - self.last_video_send >= self.video_send_interval:
                 DEBUG_PRINT("Capturing camera frame.")
-                blob, motion_detected, guidance_text = await asyncio.to_thread(self._get_frame, cap, True)
+                blob, motion_detected, guidance_text, display_frame = await asyncio.to_thread(self._get_frame, cap, True)
 
                 if blob:
                     log_event("camera_frame_captured", size=len(blob.data))
@@ -589,6 +594,13 @@ class AudioLoop:
                             pass
                     await self.out_queue.put(blob)
                     self.last_video_send = time.time()
+
+                if display_frame is not None:
+                    try:
+                        cv2.imshow("Model Feed", display_frame)
+                        cv2.waitKey(1)
+                    except Exception as e:
+                        DEBUG_PRINT(f"Error displaying camera frame: {e}")
 
                 if motion_detected:
                     self.last_motion_event_time = time.time()
@@ -637,6 +649,16 @@ class AudioLoop:
                             pass
                     await self.out_queue.put(blob)
                     self.last_video_send = time.time()
+
+                    # Display the frame being sent
+                    try:
+                        np_frame = np.frombuffer(blob.data, dtype=np.uint8)
+                        frame_bgr = cv2.imdecode(np_frame, cv2.IMREAD_COLOR)
+                        if frame_bgr is not None:
+                            cv2.imshow("Model Feed", frame_bgr)
+                            cv2.waitKey(1)
+                    except Exception as e:
+                        DEBUG_PRINT(f"Error displaying screen frame: {e}")
             await asyncio.sleep(0.05)
         DEBUG_PRINT("get_screen task finished.")
 
@@ -901,6 +923,10 @@ class AudioLoop:
             self.output_stream.close()
             DEBUG_PRINT("Output audio stream closed.")
             log_event("output_stream_closed")
+        try:
+            cv2.destroyAllWindows()
+        except Exception:
+            pass
         DEBUG_PRINT("Cleanup finished.")
         log_event("cleanup_finished")
 
