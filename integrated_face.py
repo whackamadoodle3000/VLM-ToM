@@ -156,12 +156,8 @@ class PersonMemoryCache:
                 "first_seen": time.time(),
                 "last_seen": time.time(),
                 "total_interactions": 0,
-                "served_count": 0,
-                "last_served": None,
                 "conversation_history": [],
-                "preferences": {},
                 "observations": [],
-                "state": "unknown"  # e.g., "interested", "already_served", "just_arrived"
             }
             log_event("memory_created", person_id=pid)
         return self.memories[pid_str]
@@ -184,9 +180,6 @@ class PersonMemoryCache:
                         "timestamp": time.time(),
                         "content": value
                     })
-            elif key == "preferences":
-                # Merge preferences dict
-                memory["preferences"].update(value)
             else:
                 memory[key] = value
         
@@ -207,8 +200,8 @@ class PersonMemoryCache:
         else:
             recency = f"{int(time_since_last/3600)} hours ago"
         
-        # Format conversation history (keep last 5)
-        recent_convos = memory["conversation_history"][-5:]
+        # Format conversation history
+        recent_convos = memory["conversation_history"]
         convo_text = ""
         if recent_convos:
             convo_text = "Recent interactions:\n"
@@ -216,8 +209,8 @@ class PersonMemoryCache:
                 dt = datetime.datetime.fromtimestamp(c["timestamp"]).strftime("%H:%M:%S")
                 convo_text += f"  - [{dt}] {c['content']}\n"
         
-        # Format observations (keep last 3)
-        recent_obs = memory["observations"][-3:]
+        # Format observations
+        recent_obs = memory["observations"]
         obs_text = ""
         if recent_obs:
             obs_text = "Observations:\n"
@@ -228,13 +221,8 @@ class PersonMemoryCache:
         prompt = f"""[Person Memory - ID #{pid}]
 Last seen: {recency}
 Total interactions: {memory["total_interactions"]}
-Served samples: {memory["served_count"]}{f' (last: {datetime.datetime.fromtimestamp(memory["last_served"]).strftime("%H:%M:%S")})' if memory["last_served"] else ''}
-Current state: {memory["state"]}
 {convo_text}{obs_text}"""
-        
-        if memory["preferences"]:
-            prompt += f"Preferences: {json.dumps(memory['preferences'])}\n"
-        
+
         return prompt
 
 
@@ -243,13 +231,7 @@ def Give_Sample(memory_cache, focus_pid):
     DEBUG_PRINT(f"Executing tool: Give_Sample for person #{focus_pid}")
     log_event("tool_called", tool="Give_Sample", focus_pid=focus_pid)
     
-    if focus_pid:
-        memory_cache.update_memory(focus_pid, {
-            "served_count": memory_cache.get_memory(focus_pid)["served_count"] + 1,
-            "last_served": time.time(),
-            "state": "served"
-        })
-        log_event("sample_served", person_id=focus_pid)
+    print(f"-----------------------------------> Giving sample to person #{focus_pid}")
     
     return {
         "status": "Sample delivered successfully",
@@ -343,7 +325,7 @@ class AudioLoop:
                 },
                 {
                     "name": "Update_Person_Memory",
-                    "description": "Update your memory about a person. Use this to record observations, preferences, or state changes. Use this AS OFTEN AS POSSIBLE.",
+                    "description": "Update your memory about a person. Use this to record observations, preferences, or state changes. Any time you learn any new information about the person then use this tool. Use this AS OFTEN AS POSSIBLE.",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -355,18 +337,6 @@ class AudioLoop:
                                 "type": "string",
                                 "description": "New observation about the person"
                             },
-                            "state": {
-                                "type": "string",
-                                "description": "Inferred or stated intent of person"
-                            },
-                            "conversation": {
-                                "type": "string",
-                                "description": "Dialogue or summary to append to conversation history"
-                            },
-                            "preferences": {
-                                "type": "object",
-                                "description": "Any preferences mentioned"
-                            }
                         },
                         "required": ["person_id"]
                     }
@@ -552,7 +522,6 @@ class AudioLoop:
                     memory_context.append(f"New person (ID #{pid}) detected at the counter.")
                     self.memory_cache.update_memory(pid, {
                         "total_interactions": 1,
-                        "state": "just_arrived",
                         "observations": "First appearance at the counter"
                     })
                 else:
@@ -579,8 +548,6 @@ class AudioLoop:
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             memory = self.memory_cache.get_memory(r["pid"])
             label = f"ID:{r['pid']} ({memory['state']})"
-            if memory["served_count"] > 0:
-                label += f" ✓{memory['served_count']}"
             cv2.putText(frame, label, (x1, max(0, y1 - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
         # Encode & return
@@ -836,27 +803,9 @@ class AudioLoop:
                                 updates = {}
                                 if "observation" in args:
                                     updates["observations"] = args["observation"]
-                                if "state" in args:
-                                    updates["state"] = args["state"]
-                                if "preferences" in args:
-                                    updates["preferences"] = args["preferences"]
                                 if "conversation" in args:
                                     updates["conversation_history"] = args["conversation"]
                                 
-                                missing_fields = [
-                                    field for field in ("observation", "state", "preferences")
-                                    if field not in args or args.get(field) in (None, "")
-                                ]
-                                if missing_fields:
-                                    DEBUG_PRINT(
-                                        f"Update_Person_Memory missing fields for person #{pid}: {missing_fields}"
-                                    )
-                                    log_event(
-                                        "memory_tool_missing_fields",
-                                        person_id=pid,
-                                        missing_fields=missing_fields,
-                                    )
-
                                 if pid and updates:
                                     self.memory_cache.update_memory(pid, updates)
                                     DEBUG_PRINT(f"Updated memory for person #{pid}: {updates}")
@@ -981,7 +930,7 @@ You will receive continuous audio and video feeds. Based on what you see and hea
 - Be friendly and conversational, but keep responses concise
 - You can see people even when they're not talking - feel free to initiate conversation!
 - Use the Update_Person_Memory tool to record observations, preferences, and state changes about people. Do this as often as possible whenever you get or infer ANY new piece of information.
-- When you observe something noteworthy about a person, update their memory
+- When you observe something noteworthy or mundane about a person, update their memory so you remember when you see them again.
 
 You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.""",
                 "tools": self.tools,
