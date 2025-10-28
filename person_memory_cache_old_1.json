@@ -1,0 +1,120 @@
+{
+  "1": {
+    "pid": 1,
+    "first_seen": 1760549046.061387,
+    "last_seen": 1760549177.410836,
+    "total_interactions": 39,
+    "served_count": 1,
+    "last_served": 1760549063.219527,
+    "conversation_history": [
+      {
+        "timestamp": 1760549048.533622,
+        "content": "Offered a nut bar sample."
+      },
+      {
+        "timestamp": 1760549063.2573922,
+        "content": "User accepted sample and received it."
+      },
+      {
+        "timestamp": 1760549065.690412,
+        "content": "User accepted sample."
+      }
+    ],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760549046.061536,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760549048.5336199,
+        "content": "Approaching counter."
+      },
+      {
+        "timestamp": 1760549063.25739,
+        "content": "Received sample."
+      },
+      {
+        "timestamp": 1760549065.690411,
+        "content": "Accepted sample."
+      }
+    ],
+    "state": "Received sample"
+  },
+  "2": {
+    "pid": 2,
+    "first_seen": 1760549065.7533288,
+    "last_seen": 1760549177.410003,
+    "total_interactions": 23,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [
+      {
+        "timestamp": 1760549071.590837,
+        "content": "Offered a nut bar sample."
+      },
+      {
+        "timestamp": 1760549111.451367,
+        "content": "User clarified they hadn't received a sample, I apologized and gave them one."
+      }
+    ],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760549065.753481,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760549071.590836,
+        "content": "Approaching counter."
+      },
+      {
+        "timestamp": 1760549111.451287,
+        "content": "Received sample."
+      }
+    ],
+    "state": "Received sample"
+  },
+  "3": {
+    "pid": 3,
+    "first_seen": 1760549068.2292328,
+    "last_seen": 1760549177.4112158,
+    "total_interactions": 39,
+    "served_count": 0,
+    "last_served": null,
+    "conversation_history": [
+      {
+        "timestamp": 1760549075.259249,
+        "content": "Offered a nut bar sample."
+      },
+      {
+        "timestamp": 1760549085.821856,
+        "content": "User accepted sample."
+      },
+      {
+        "timestamp": 1760549098.160141,
+        "content": "User asked for another sample for their friend (ID #1), who already received one. Explained the one-sample rule."
+      }
+    ],
+    "preferences": {},
+    "observations": [
+      {
+        "timestamp": 1760549068.229368,
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1760549075.259248,
+        "content": "Approaching counter."
+      },
+      {
+        "timestamp": 1760549085.821855,
+        "content": "Accepted sample."
+      },
+      {
+        "timestamp": 1760549098.16014,
+        "content": "Requested second sample for friend."
+      }
+    ],
+    "state": "Requested additional sample"
+  }
+}

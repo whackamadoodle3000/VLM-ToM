@@ -316,8 +316,16 @@ class AudioLoop:
         self.last_proactive_prompt_time = 0.0
         self.proactive_prompt_cooldown = 5.0  # Increased from 0.25
 
-        # Face ReID with memory integration
-        self.reid = FaceReID(max_age_s=600, match_threshold=0.42)
+        # Face ReID with adaptive matching tuned to reduce duplicate IDs
+        self.reid = FaceReID(
+            max_age_s=600,
+            match_threshold=float(os.getenv("REID_BASE_THRESHOLD", "0.48")),
+            min_match_threshold=float(os.getenv("REID_MIN_THRESHOLD", "0.32")),
+            recent_return_window=float(os.getenv("REID_RETURN_WINDOW", "12.0")),
+            proximity_radius=float(os.getenv("REID_PROXIMITY_RADIUS", "250.0")),
+            proximity_bonus=float(os.getenv("REID_PROXIMITY_BONUS", "0.22")),
+            adaptive_rate=float(os.getenv("REID_ADAPTIVE_RATE", "0.24")),
+        )
         self.current_focus_pid = None
         self.last_memory_update = {}  # pid -> timestamp of last update
         
