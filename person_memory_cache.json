@@ -1,31 +1,75 @@
 {
   "1": {
     "pid": 1,
-    "first_seen": 1761688446.6424162,
-    "last_seen": 1761688546.4974852,
-    "total_interactions": 31,
+    "first_seen": 1762814560.551112,
+    "last_seen": 1762814833.719887,
+    "total_interactions": 98,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1761688446.642578,
+        "timestamp": 1762814560.551251,
         "content": "First appearance at the counter"
       },
       {
-        "timestamp": 1761688460.022389,
-        "content": "Requested a sample."
+        "timestamp": 1762814562.284914,
+        "content": "Person approached the counter and was offered a sample."
+      },
+      {
+        "timestamp": 1762814591.248773,
+        "content": "Person declined the sample."
+      },
+      {
+        "timestamp": 1762814642.273619,
+        "content": "Person identified himself as Pranav. He likes apples."
+      },
+      {
+        "timestamp": 1762814653.343571,
+        "content": "Pranav decided to take a sample of the nut bar. Sample was given."
+      },
+      {
+        "timestamp": 1762814656.742914,
+        "content": "Pranav decided to take a nut bar sample. A sample was given to Pranav."
+      },
+      {
+        "timestamp": 1762814680.7234821,
+        "content": "Pranav decided he did not want the sample and gave it back."
+      },
+      {
+        "timestamp": 1762814781.107435,
+        "content": "Pranav's friend's name is Gilbert."
+      },
+      {
+        "timestamp": 1762814832.2766669,
+        "content": "Pranav said he is coming back in one hour."
       }
     ]
   },
   "2": {
     "pid": 2,
-    "first_seen": 1761688482.7536252,
-    "last_seen": 1761688501.290863,
-    "total_interactions": 8,
+    "first_seen": 1762814692.167497,
+    "last_seen": 1762814787.276437,
+    "total_interactions": 24,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1761688482.753752,
+        "timestamp": 1762814692.167638,
         "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1762814696.5758772,
+        "content": "Person approached the counter and was offered a sample."
+      },
+      {
+        "timestamp": 1762814743.066957,
+        "content": "Person accepted the sample offer and received a nut bar sample."
+      },
+      {
+        "timestamp": 1762814781.13436,
+        "content": "Person identified himself as Gilbert."
+      },
+      {
+        "timestamp": 1762814787.2765372,
+        "content": "Pranav's friend's name is Gilbert."
       }
     ]
   }

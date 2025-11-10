@@ -298,6 +298,10 @@ class AudioLoop:
         self.last_proactive_prompt_time = 0.0
         self.proactive_prompt_cooldown = 5.0  # Increased from 0.25
 
+        # Memory reminder throttle
+        self.memory_reminder_cooldown = 8.0
+        self.last_memory_reminder_time = 0.0
+
         # Face ReID with adaptive matching tuned to reduce duplicate IDs
         self.reid = FaceReID(
             max_age_s=600,
@@ -376,6 +380,39 @@ class AudioLoop:
             await self.session.send_client_content(turns=turns_payload)
         except Exception as e:
             DEBUG_PRINT(f"Failed to send proactive prompt: {e}")
+
+    async def send_memory_reminder(self):
+        """Nudge the model to update memory after a new interaction."""
+        if not self.session:
+            DEBUG_PRINT("No active session; skipping memory reminder.")
+            return
+
+        now = time.time()
+        if now - self.last_memory_reminder_time < self.memory_reminder_cooldown:
+            DEBUG_PRINT("Skipping memory reminder due to cooldown.")
+            return
+
+        self.last_memory_reminder_time = now
+        reminder_text = (
+            "[Operator Guidance] Memory reminder: Review the most recent exchange and "
+            "call Update_Person_Memory for any new facts, names, preferences, or actions "
+            "you just learned."
+        )
+        DEBUG_PRINT(f"Triggering memory reminder: {reminder_text}")
+        log_event("memory_reminder_sent", text=reminder_text)
+        try:
+            await self.session.send_client_content(
+                turns={
+                    "parts": [
+                        {
+                            "text": reminder_text
+                        }
+                    ]
+                }
+            )
+        except Exception as e:
+            DEBUG_PRINT(f"Failed to send memory reminder: {e}")
+            log_event("memory_reminder_error", error=str(e))
 
     def calculate_volume(self, audio_data):
         """Calculate RMS volume of audio data."""
@@ -746,6 +783,9 @@ class AudioLoop:
                         audio_accumulator.clear()
                         self.last_audio_send = current_time
 
+                    if self.current_focus_pid is not None:
+                        asyncio.create_task(self.send_memory_reminder())
+
                 send_interval = self.speaking_audio_interval if self.is_person_speaking else self.ambient_audio_interval
                 if current_time - self.last_audio_send >= send_interval and len(audio_accumulator) > 0 and can_send:
                     DEBUG_PRINT(f"Periodic send ({'speaking' if self.is_person_speaking else 'ambient'}).")
@@ -816,9 +856,8 @@ class AudioLoop:
                             elif fc.name == "Update_Person_Memory":
                                 args = json.loads(fc.args) if isinstance(fc.args, str) else fc.args
                                 pid = args.get("person_id")
-                                
                                 DEBUG_PRINT(
-                                    f"Update_Person_Memory tool called with args: {_convert_for_log(args)}"
+                                    f"Update_Person_Memory tool called with raw args: {_convert_for_log(args)}"
                                 )
                                 log_event("memory_tool_invocation", name=fc.name, args=args)
 
@@ -827,12 +866,49 @@ class AudioLoop:
                                     updates["observations"] = args["observation"]
                                 if "conversation" in args:
                                     updates["conversation_history"] = args["conversation"]
-                                
+
                                 if pid and updates:
-                                    self.memory_cache.update_memory(pid, updates)
-                                    DEBUG_PRINT(f"Updated memory for person #{pid}: {updates}")
-                                
-                                result = {"status": "Memory updated", "person_id": pid}
+                                    DEBUG_PRINT(
+                                        f"Applying memory update for PID {pid}: {_convert_for_log(updates)}"
+                                    )
+                                    log_event(
+                                        "memory_update_payload",
+                                        person_id=pid,
+                                        updates=updates,
+                                        cache_exists=pid in self.memory_cache.memories,
+                                    )
+                                    before_snapshot = _convert_for_log(
+                                        self.memory_cache.memories.get(str(pid), {})
+                                    )
+                                    log_event(
+                                        "memory_before_update",
+                                        person_id=pid,
+                                        memory=before_snapshot,
+                                    )
+
+                                    memory_after = self.memory_cache.update_memory(pid, updates)
+
+                                    log_event(
+                                        "memory_after_update",
+                                        person_id=pid,
+                                        memory=_convert_for_log(memory_after),
+                                    )
+                                    DEBUG_PRINT(
+                                        f"Updated memory for person #{pid}. Total observations:"
+                                        f" {len(memory_after.get('observations', []))}."
+                                    )
+                                else:
+                                    log_event(
+                                        "memory_update_skipped",
+                                        person_id=pid,
+                                        reason="missing pid or updates",
+                                        args=args,
+                                    )
+                                    DEBUG_PRINT(
+                                        f"Skipping memory update. pid={pid}, updates={_convert_for_log(updates)}"
+                                    )
+
+                                result = {"status": "Memory updated", "person_id": pid, "updates_applied": bool(updates)}
                                 fr = types.FunctionResponse(id=fc.id, name=fc.name, response=result)
                                 log_event("tool_response_sent", tool=fc.name, response=result)
                                 await self.session.send_tool_response(function_responses=[fr])
@@ -959,7 +1035,18 @@ You will receive continuous audio and video feeds. Based on what you see and hea
 - Use the Update_Person_Memory tool to record observations, preferences, and state changes about people. Do this as often as possible whenever you get or infer ANY new piece of information.
 - When you observe something noteworthy or mundane about a person, update their memory so you remember when you see them again.
 
-You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.""",
+You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.
+
+When you learn **any** new fact about someone (their name, what they said, a preference, a promise you made, something they did, how they reacted, etc.), immediately call the `Update_Person_Memory` tool with that information before continuing the conversation. Do not wait until later—log it right away so you remember on the next turn.
+
+Example:
+- Customer: "Hi, I'm Sam. Can I try the nut bar again?"
+  -> You should:
+     1. Politely respond to Sam.
+     2. Call `Update_Person_Memory` with `person_id` = Sam's ID and `observation` = "Sam introduced themselves and asked for another sample."
+
+If you notice multiple new facts in one turn, make multiple tool calls (one per fact) so each detail is stored clearly. Avoid logging vague or generic statements; make each observation specific and actionable.
+""",
                 "tools": self.tools,
             }
             
