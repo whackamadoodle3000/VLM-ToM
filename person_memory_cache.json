@@ -1,84 +1,78 @@
 {
   "1": {
     "pid": 1,
-    "first_seen": 1762823485.604903,
-    "last_seen": 1762823648.7994869,
-    "total_interactions": 60,
+    "first_seen": 1762823873.010637,
+    "last_seen": 1762823987.9734788,
+    "total_interactions": 31,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1762823485.6053178,
-        "readable": "2025-11-10 20:11:25",
+        "timestamp": 1762823873.010862,
+        "readable": "2025-11-10 20:17:53",
         "content": "First appearance at the counter"
       },
       {
-        "timestamp": 1762823487.311737,
-        "readable": "2025-11-10 20:11:27",
-        "content": "Person approached the counter and was offered a nut bar sample."
+        "timestamp": 1762823896.8373451,
+        "readable": "2025-11-10 20:18:16",
+        "content": "Person accepted a nut bar sample."
       },
       {
-        "timestamp": 1762823507.632606,
-        "readable": "2025-11-10 20:11:47",
-        "content": "Person accepted the nut bar sample."
+        "timestamp": 1762823908.21389,
+        "readable": "2025-11-10 20:18:28",
+        "content": "Person introduced themselves as Pranav."
       },
       {
-        "timestamp": 1762823511.0263932,
-        "readable": "2025-11-10 20:11:51",
-        "content": "Person accepted the nut bar sample."
-      },
-      {
-        "timestamp": 1762823512.8637362,
-        "readable": "2025-11-10 20:11:52",
+        "timestamp": 1762823916.3428311,
+        "readable": "2025-11-10 20:18:36",
         "content": "Person #1 left the counter."
       },
       {
-        "timestamp": 1762823523.3025742,
-        "readable": "2025-11-10 20:12:03",
-        "content": "Person accepted the nut bar sample."
-      },
-      {
-        "timestamp": 1762823535.719598,
-        "readable": "2025-11-10 20:12:15",
-        "content": "Person #1 returned to the counter and asked why two samples were deposited. Clarified that one sample was offered to each person present."
-      },
-      {
-        "timestamp": 1762823605.1538,
-        "readable": "2025-11-10 20:13:25",
-        "content": "Person #1 is still at the counter."
-      },
-      {
-        "timestamp": 1762823626.9941041,
-        "readable": "2025-11-10 20:13:46",
-        "content": "Person #1 left the counter."
+        "timestamp": 1762823968.256586,
+        "readable": "2025-11-10 20:19:28",
+        "content": "Pranav returned and asked for a second sample, but was politely reminded he already received one."
       }
     ]
   },
   "2": {
     "pid": 2,
-    "first_seen": 1762823512.862421,
-    "last_seen": 1762823537.046464,
-    "total_interactions": 6,
+    "first_seen": 1762823919.015003,
+    "last_seen": 1762823948.627448,
+    "total_interactions": 13,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1762823512.862537,
-        "readable": "2025-11-10 20:11:52",
+        "timestamp": 1762823919.015126,
+        "readable": "2025-11-10 20:18:39",
         "content": "First appearance at the counter"
       },
       {
-        "timestamp": 1762823524.981753,
-        "readable": "2025-11-10 20:12:04",
-        "content": "Person approached the counter and was offered a nut bar sample."
+        "timestamp": 1762823928.5658638,
+        "readable": "2025-11-10 20:18:48",
+        "content": "Person accepted a nut bar sample."
       },
       {
-        "timestamp": 1762823525.077076,
-        "readable": "2025-11-10 20:12:05",
+        "timestamp": 1762823948.6280751,
+        "readable": "2025-11-10 20:19:08",
         "content": "Person #2 left the counter."
+      }
+    ]
+  },
+  "3": {
+    "pid": 3,
+    "first_seen": 1762823961.6436338,
+    "last_seen": 1762823963.928642,
+    "total_interactions": 2,
+    "conversation_history": [],
+    "observations": [
+      {
+        "timestamp": 1762823961.64374,
+        "readable": "2025-11-10 20:19:21",
+        "content": "First appearance at the counter"
       },
       {
-        "timestamp": 1762823537.046518,
-        "readable": "2025-11-10 20:12:17",
-        "content": "Sample was given to Person #2."
+        "timestamp": 1762823963.928742,
+        "readable": "2025-11-10 20:19:23",
+        "content": "Person #3 left the counter."
       }
     ]
   }

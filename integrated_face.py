@@ -15,13 +15,6 @@ import mss
 import numpy as np
 import argparse
 
-try:
-    import webrtcvad
-    WEBRTC_AVAILABLE = True
-except Exception:  # pragma: no cover - optional dependency
-    webrtcvad = None
-    WEBRTC_AVAILABLE = False
-
 from google import genai
 from google.genai import types
 from face_reid import FaceReID
@@ -89,14 +82,13 @@ def log_event(event_name, **details):
     }
     LOGGER.info("EVENT %s", json.dumps(payload, ensure_ascii=False))
 
-
-MODEL = "gemini-2.5-flash-native-audio-preview-09-2025"
-DEFAULT_MODE = "camera"
-MEMORY_CACHE_FILE = "person_memory_cache.json"
-RESET_MEMORY_ON_START = True
-SAMPLE_COUNTER_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sample_counter.json")
-
-client = genai.Client(api_key="", http_options={"api_version": "v1alpha"})
+# Try to import WebRTC VAD
+try:
+    import webrtcvad
+    WEBRTC_AVAILABLE = True
+except ImportError:
+    WEBRTC_AVAILABLE = False
+    DEBUG_PRINT("WebRTC VAD not available. Voice detection will be volume-based only.")
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -104,38 +96,12 @@ SEND_SAMPLE_RATE = 16000
 RECEIVE_SAMPLE_RATE = 24000
 CHUNK_SIZE = 1024
 
+MODEL = "gemini-2.5-flash-native-audio-preview-09-2025"
+DEFAULT_MODE = "camera"
+MEMORY_CACHE_FILE = "person_memory_cache.json"
+RESET_MEMORY_ON_START = True
 
-def reset_sample_counter():
-    """Reset the sample counter file to zero at startup."""
-    try:
-        with open(SAMPLE_COUNTER_FILE, "w", encoding="utf-8") as f:
-            json.dump({"total_samples": 0}, f)
-        DEBUG_PRINT(f"Sample counter reset to 0 at {SAMPLE_COUNTER_FILE}")
-        log_event("sample_counter_reset", file=SAMPLE_COUNTER_FILE)
-    except Exception as e:
-        DEBUG_PRINT(f"Failed to reset sample counter: {e}")
-        log_event("sample_counter_reset_error", file=SAMPLE_COUNTER_FILE, error=str(e))
-
-
-def increment_sample_counter():
-    """Increment and persist the total number of samples given."""
-    total = 0
-    try:
-        if os.path.exists(SAMPLE_COUNTER_FILE):
-            with open(SAMPLE_COUNTER_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                total = data.get("total_samples", 0)
-        total += 1
-        with open(SAMPLE_COUNTER_FILE, "w", encoding="utf-8") as f:
-            json.dump({"total_samples": total}, f)
-        DEBUG_PRINT(f"Sample counter incremented to {total}")
-        log_event("sample_counter_increment", file=SAMPLE_COUNTER_FILE, total=total)
-    except Exception as e:
-        DEBUG_PRINT(f"Failed to increment sample counter: {e}")
-        log_event("sample_counter_increment_error", file=SAMPLE_COUNTER_FILE, error=str(e))
-
-
-reset_sample_counter()
+client = genai.Client(api_key="", http_options={"api_version": "v1alpha"})
 
 
 class PersonMemoryCache:
@@ -266,7 +232,6 @@ def Give_Sample(memory_cache, focus_pid):
     """Tool function for giving a sample."""
     DEBUG_PRINT(f"Executing tool: Give_Sample for person #{focus_pid}")
     log_event("tool_called", tool="Give_Sample", focus_pid=focus_pid)
-    increment_sample_counter()
     
     print(f"-----------------------------------> Giving sample to person #{focus_pid}")
     
@@ -300,9 +265,9 @@ class AudioLoop:
         # WebRTC VAD setup
         self.vad = None
         if WEBRTC_AVAILABLE:
-            self.vad = webrtcvad.Vad(0)
+            self.vad = webrtcvad.Vad(2)
             DEBUG_PRINT("WebRTC VAD initialized.")
-            log_event("vad_initialized", mode=0)
+            log_event("vad_initialized", mode=2)
         
         # Echo prevention state
         self.is_ai_speaking = False
@@ -321,9 +286,9 @@ class AudioLoop:
         self.min_send_bytes = int(SEND_SAMPLE_RATE * 0.25 * 2)
         
         # Voice detection state
-        self.min_volume_threshold = 0.0020
+        self.min_volume_threshold = 0.0035
         self.noise_floor = self.min_volume_threshold / 2
-        self.dynamic_threshold_ratio = 1.3
+        self.dynamic_threshold_ratio = 1.6
         self.is_person_speaking = False
 
         # Visual proactivity state
@@ -1111,10 +1076,10 @@ class AudioLoop:
 
 You will receive continuous audio and video feeds. Based on what you see and hear:
 
-- Proactively greet customers who approach or look interested in samples. 
+- Proactively greet customers who approach or look interested in samples
 - You have persistent memory of every person you interact with, including their ID number
 - Always reference your memory when you see someone
-- IMPORTANT: Each person should only ever get ONE sample. DO NOT GIVE THE SAME PERSON MULTIPLE SAMPLES UNDER ANY CIRCUMSTANCES. Calling the tool is equivalent to giving a sample. Only call Give_Sample after you confirmed their eligibility for a sample and they ask for a sample.
+- Each person should only get ONE sample per visit
 - No one has received samples before you started giving them out
 - The sample is a nut bar
 - Be friendly and conversational, but keep responses concise
@@ -1125,15 +1090,15 @@ You will receive continuous audio and video feeds. Based on what you see and hea
 
 You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.
 
-When you learn **any** new fact about someone (their name, what they said, a preference, a promise you made, a quotes, something they did, how they reacted, their emotions, their questions, their resposnes, etc.), immediately call the `Update_Person_Memory` tool with that information before continuing the conversation. Do not wait until later—log it right away so you remember on the next turn.
+When you learn **any** new fact about someone (their name, what they said, a preference, a promise you made, something they did, how they reacted, their emotions, etc.), immediately call the `Update_Person_Memory` tool with that information before continuing the conversation. Do not wait until later—log it right away so you remember on the next turn.
 
 Example of how to use tools for different (non-costco sampling) scenario:
 - "Hey, I'm sam. A fun fact about me is that I like to eat nuts."
   -> You should:
      1. Politely respond to Sam.
-     2. Call `Update_Person_Memory` with `person_id` = Sam's ID and `observation` = "Person introduced themselves as Sam and asked for a nut bar ("Hey, I'm sam. A fun fact about me is that I like to eat nuts")."
+     2. Call `Update_Person_Memory` with `person_id` = Sam's ID and `observation` = "Person introduced themselves as Sam and asked for a nut bar."
 
-If you notice multiple new facts in one turn, make multiple tool calls (one per fact) so each detail is stored clearly. Make each observation specific.
+If you notice multiple new facts in one turn, make multiple tool calls (one per fact) so each detail is stored clearly. Avoid logging vague or generic statements; make each observation specific.
 """,
                 "tools": self.tools,
             }
