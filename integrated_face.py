@@ -174,10 +174,12 @@ class PersonMemoryCache:
         log_event("memory_update_request", person_id=pid, updates=updates)
         for key, value in updates.items():
             if key == "conversation_history" or key == "observations":
-                # Append to lists
                 if value:
+                    timestamp = time.time()
+                    readable = datetime.datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
                     memory[key].append({
-                        "timestamp": time.time(),
+                        "timestamp": timestamp,
+                        "readable": readable,
                         "content": value
                     })
             else:
@@ -263,9 +265,9 @@ class AudioLoop:
         # WebRTC VAD setup
         self.vad = None
         if WEBRTC_AVAILABLE:
-            self.vad = webrtcvad.Vad(2)
+            self.vad = webrtcvad.Vad(0)
             DEBUG_PRINT("WebRTC VAD initialized.")
-            log_event("vad_initialized", mode=2)
+            log_event("vad_initialized", mode=0)
         
         # Echo prevention state
         self.is_ai_speaking = False
@@ -284,9 +286,9 @@ class AudioLoop:
         self.min_send_bytes = int(SEND_SAMPLE_RATE * 0.25 * 2)
         
         # Voice detection state
-        self.min_volume_threshold = 0.0035
+        self.min_volume_threshold = 0.0020
         self.noise_floor = self.min_volume_threshold / 2
-        self.dynamic_threshold_ratio = 1.6
+        self.dynamic_threshold_ratio = 1.3
         self.is_person_speaking = False
 
         # Visual proactivity state
@@ -301,6 +303,11 @@ class AudioLoop:
         # Memory reminder throttle
         self.memory_reminder_cooldown = 8.0
         self.last_memory_reminder_time = 0.0
+
+        # Presence tracking to capture "still here" and "left" observations
+        self.presence_note_interval = 90.0
+        self.presence_note_state = {}
+        self._currently_visible_pids = set()
 
         # Face ReID with adaptive matching tuned to reduce duplicate IDs
         self.reid = FaceReID(
@@ -361,8 +368,10 @@ class AudioLoop:
             DEBUG_PRINT("Skipping proactive prompt due to cooldown.")
             return
 
+        now = time.time()
+        readable_now = datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d %H:%M:%S")
         self.last_proactive_prompt_time = now
-        prompt_text = f"[Operator Guidance] [Make sure to update memory cache regularly with any new information ] {text}"
+        prompt_text = f"[Operator Guidance] @ epoch {now:.0f} (local {readable_now}) {text}"
         DEBUG_PRINT(f"Triggering proactive prompt: {prompt_text}")
         log_event("proactive_prompt", prompt=prompt_text)
         try:
@@ -388,15 +397,12 @@ class AudioLoop:
             return
 
         now = time.time()
-        if now - self.last_memory_reminder_time < self.memory_reminder_cooldown:
-            DEBUG_PRINT("Skipping memory reminder due to cooldown.")
-            return
-
-        self.last_memory_reminder_time = now
+        readable_now = datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d %H:%M:%S")
         reminder_text = (
-            "[Operator Guidance] Memory reminder: Review the most recent exchange and "
-            "call Update_Person_Memory for any new facts, names, preferences, or actions "
-            "you just learned."
+            f"[Operator Guidance] Memory reminder @ current time epoch {now:.0f} (local {readable_now}): "
+            "Review the most recent exchange and call Update_Person_Memory for any new facts, things that are happening in the last image received, names, preferences, beliefs, actions, quotes, emotions, or "
+            "timing details, etc. you just observed (for example, if someone is still waiting or has left). "
+            "Before you log a note, glance at their existing memory and avoid repeating anything you've just stored (see timestamps).", 
         )
         DEBUG_PRINT(f"Triggering memory reminder: {reminder_text}")
         log_event("memory_reminder_sent", text=reminder_text)
@@ -513,6 +519,49 @@ class AudioLoop:
                 best_d, best_pid = d, r["pid"]
         self.current_focus_pid = best_pid
 
+    def _get_person_label(self, pid, memory):
+        return f"Person #{pid}"
+
+    def _handle_presence_notes(self, reid_results):
+        """Automatically log notes when people stay for a while or depart."""
+        current_time = time.time()
+        current_pids = {r["pid"] for r in reid_results}
+
+        # Notes for people currently present
+        for pid in current_pids:
+            memory = self.memory_cache.get_memory(pid)
+            label = self._get_person_label(pid, memory)
+            state = self.presence_note_state.get(pid)
+            if state is None:
+                # First time we've seen this person in the current session; start the timer.
+                state = {"last_presence_note": current_time, "status": "present"}
+                self.presence_note_state[pid] = state
+            else:
+                elapsed = current_time - state.get("last_presence_note", 0.0)
+                if elapsed >= self.presence_note_interval:
+                    observation = f"{label} is still at the counter."
+                    self.memory_cache.update_memory(pid, {"observations": observation})
+                    state["last_presence_note"] = current_time
+                    state["status"] = "present"
+
+        # Notes for people who have left
+        departed_pids = self._currently_visible_pids - current_pids
+        for pid in departed_pids:
+            state = self.presence_note_state.get(pid)
+            if state is None:
+                state = {"last_presence_note": 0.0, "status": "unknown"}
+                self.presence_note_state[pid] = state
+            elapsed = current_time - state.get("last_presence_note", 0.0)
+            if state.get("status") != "left" or elapsed >= self.presence_note_interval:
+                memory = self.memory_cache.get_memory(pid)
+                label = self._get_person_label(pid, memory)
+                observation = f"{label} left the counter."
+                self.memory_cache.update_memory(pid, {"observations": observation})
+                state["last_presence_note"] = current_time
+                state["status"] = "left"
+
+        self._currently_visible_pids = current_pids
+
     def _get_frame(self, cap, detect_motion=False):
         """Helper to capture and process one camera frame with memory integration."""
         ret, frame = cap.read()
@@ -537,7 +586,7 @@ class AudioLoop:
                     motion_detected = True
                     self.last_motion_event_time = time.time()
                     guidance_msgs.append(
-                        "Motion observed near the counter. Check who's approaching."
+                        "Motion observed and image captured. If neccesary, respond appropriate or write to memory cache appropriately"
                     )
                 self.last_frame_gray = gray
 
@@ -578,6 +627,9 @@ class AudioLoop:
             
             if memory_context:
                 guidance_msgs.extend(memory_context)
+
+        # Presence based observations (still here / left)
+        self._handle_presence_notes(reid_results)
 
         # Optional debug drawing
         for r in reid_results:
@@ -1024,28 +1076,33 @@ class AudioLoop:
 
 You will receive continuous audio and video feeds. Based on what you see and hear:
 
-- Proactively greet customers who approach or look interested in samples
+- Proactively greet customers who approach or look interested in samples. proactively notice details and body language about people talk to people and don't be awkward in conversation when a person is there. you work in customer service so pay attention to your customers.
 - You have persistent memory of every person you interact with, including their ID number
-- Always reference your memory when you see someone - acknowledge if they've been here before
+- Always reference your memory when you see someone
 - Each person should only get ONE sample per visit
 - No one has received samples before you started giving them out
 - The sample is a nut bar
 - Be friendly and conversational, but keep responses concise
 - You can see people even when they're not talking - feel free to initiate conversation!
+- Pay attention to the flow of time: note when someone lingers, returns later, or leaves the counter.
 - Use the Update_Person_Memory tool to record observations, preferences, and state changes about people. Do this as often as possible whenever you get or infer ANY new piece of information.
-- When you observe something noteworthy or mundane about a person, update their memory so you remember when you see them again.
+- When adding a note, briefly review the existing memory entry first so you don’t log the same observation twice; refine or expand instead of repeating.
 
 You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.
 
-When you learn **any** new fact about someone (their name, what they said, a preference, a promise you made, something they did, how they reacted, etc.), immediately call the `Update_Person_Memory` tool with that information before continuing the conversation. Do not wait until later—log it right away so you remember on the next turn.
+When you learn **any** new fact about someone (their name, what they said, a preference, a promise you made, a quotes, something they did, how they reacted, their emotions, etc.), immediately call the `Update_Person_Memory` tool with that information before continuing the conversation. Do not wait until later—log it right away so you remember on the next turn.
 
-Example:
-- Customer: "Hi, I'm Sam. Can I try the nut bar again?"
+Example of how to use tools for different (non-costco sampling) scenario:
+- "Hey, I'm sam. A fun fact about me is that I like to eat nuts."
   -> You should:
      1. Politely respond to Sam.
-     2. Call `Update_Person_Memory` with `person_id` = Sam's ID and `observation` = "Sam introduced themselves and asked for another sample."
+     2. Call `Update_Person_Memory` with `person_id` = Sam's ID and `observation` = "Person introduced themselves as Sam and asked for a nut bar ("Hey, I'm sam. A fun fact about me is that I like to eat nuts")."
+- <person made weird facial expression but didn't say anything>
+    -> You should:
+       1. Think about the conversation and anything that happened in context that is relevant to the person's mental state when deciding whether to respond.
+       2. Call `Update_Person_Memory` with `person_id` = the person's ID and `observation` = "Person made a <facial expression> facial expression in response to <something>"
 
-If you notice multiple new facts in one turn, make multiple tool calls (one per fact) so each detail is stored clearly. Avoid logging vague or generic statements; make each observation specific and actionable.
+If you notice multiple new facts in one turn, make multiple tool calls (one per fact) so each detail is stored clearly. Make each observation specific.
 """,
                 "tools": self.tools,
             }

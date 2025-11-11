@@ -1,0 +1,129 @@
+{
+  "1": {
+    "pid": 1,
+    "first_seen": 1762817700.684243,
+    "last_seen": 1762818187.2445052,
+    "total_interactions": 94,
+    "conversation_history": [],
+    "observations": [
+      {
+        "timestamp": 1762817700.684384,
+        "readable": "2025-11-10 18:35:00",
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1762817709.467322,
+        "readable": "2025-11-10 18:35:09",
+        "content": "Person accepted a sample of the nut bar."
+      },
+      {
+        "timestamp": 1762817724.6449761,
+        "readable": "2025-11-10 18:35:24",
+        "content": "Person stated they are allergic to nuts."
+      },
+      {
+        "timestamp": 1762817737.819635,
+        "readable": "2025-11-10 18:35:37",
+        "content": "Person stated they already ate the nut bar sample despite being allergic. Expressed concern for their well-being."
+      },
+      {
+        "timestamp": 1762817791.3467689,
+        "readable": "2025-11-10 18:36:31",
+        "content": "Person #1 is still at the counter."
+      },
+      {
+        "timestamp": 1762817800.141403,
+        "readable": "2025-11-10 18:36:40",
+        "content": "Person confirmed they are having an allergic reaction. Advised them to seek medical attention."
+      },
+      {
+        "timestamp": 1762817818.219918,
+        "readable": "2025-11-10 18:36:58",
+        "content": "Person introduced their friend, a woman with glasses and a white coat, as Frisha and a doctor."
+      },
+      {
+        "timestamp": 1762817841.724628,
+        "readable": "2025-11-10 18:37:21",
+        "content": "Person #1 left the counter."
+      },
+      {
+        "timestamp": 1762817934.4450119,
+        "readable": "2025-11-10 18:38:54",
+        "content": "Person #1 is still at the counter."
+      },
+      {
+        "timestamp": 1762817959.682261,
+        "readable": "2025-11-10 18:39:19",
+        "content": "Person #1 left the counter."
+      },
+      {
+        "timestamp": 1762818126.7378829,
+        "readable": "2025-11-10 18:42:06",
+        "content": "Person #1 is still at the counter."
+      }
+    ]
+  },
+  "2": {
+    "pid": 2,
+    "first_seen": 1762817811.18694,
+    "last_seen": 1762817957.132996,
+    "total_interactions": 31,
+    "conversation_history": [],
+    "observations": [
+      {
+        "timestamp": 1762817811.187072,
+        "readable": "2025-11-10 18:36:51",
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1762817818.247201,
+        "readable": "2025-11-10 18:36:58",
+        "content": "First appearance at the counter with Person 1. Introduced as Frisha and a doctor by Person 1. Wearing glasses and a white coat."
+      },
+      {
+        "timestamp": 1762817823.4008698,
+        "readable": "2025-11-10 18:37:03",
+        "content": "Person #1 is with a woman introduced as their friend Frisha, who is a doctor. Frisha is wearing glasses and a white coat."
+      },
+      {
+        "timestamp": 1762817831.61045,
+        "readable": "2025-11-10 18:37:11",
+        "content": "Person #2 accepted a sample of the nut bar."
+      },
+      {
+        "timestamp": 1762817891.177026,
+        "readable": "2025-11-10 18:38:11",
+        "content": "Person #2 left the counter."
+      }
+    ]
+  },
+  "3": {
+    "pid": 3,
+    "first_seen": 1762817959.678734,
+    "last_seen": 1762818126.738998,
+    "total_interactions": 61,
+    "conversation_history": [],
+    "observations": [
+      {
+        "timestamp": 1762817959.67886,
+        "readable": "2025-11-10 18:39:19",
+        "content": "First appearance at the counter"
+      },
+      {
+        "timestamp": 1762818005.733068,
+        "readable": "2025-11-10 18:40:05",
+        "content": "Person #3 mentioned Person #1's name is Pranav and referred to him as their friend. They also acknowledged Pranav's allergic reaction."
+      },
+      {
+        "timestamp": 1762818050.979327,
+        "readable": "2025-11-10 18:40:50",
+        "content": "Person #3 is still at the counter."
+      },
+      {
+        "timestamp": 1762818126.739082,
+        "readable": "2025-11-10 18:42:06",
+        "content": "Person #3 left the counter."
+      }
+    ]
+  }
+}
