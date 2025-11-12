@@ -115,8 +115,8 @@ class AudioLoop:
         # Timers for continuous data sending
         self.last_video_send = 0
         self.base_video_send_interval = 5.0  # ~0.2 FPS when idle
-        self.active_video_send_interval = 1.0  # ~1 FPS shortly after motion
-        self.motion_state_decay = 3.0  # seconds staying in active mode after motion
+        self.active_video_send_interval = 2.0  # match integrated_face.py
+        self.motion_state_decay = 5.0  # seconds staying in active mode after motion
         self.video_send_interval = self.base_video_send_interval
         self.last_audio_send = 0
         self.ambient_audio_interval = 1.0  # How often to send ambient sound
@@ -133,10 +133,10 @@ class AudioLoop:
         self.last_frame_gray = None
         self.motion_pixel_threshold = 25
         self.motion_trigger_ratio = 0.02
-        self.motion_cooldown = 0.25
+        self.motion_cooldown = 2.0
         self.last_motion_event_time = 0.0
         self.last_proactive_prompt_time = 0.0
-        self.proactive_prompt_cooldown = 0.25
+        self.proactive_prompt_cooldown = 5.0
         
         if WEBRTC_AVAILABLE:
             self.frame_duration_ms = 30
