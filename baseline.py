@@ -305,7 +305,7 @@ class AudioLoop:
                         DEBUG_PRINT("Motion detected in frame. Triggering proactive prompt.")
                         asyncio.create_task(
                             self.trigger_proactive_prompt(
-                                "Motion observed near the counter by generic image motion detector. See if there are people. Evaluate what to do, depending on if you have been in conversation with this person, haven't seen this person, see a new person that you might want to greet, see someone definitely isn't interested, etc. If there is a person that looks like they may want to engage with you and hasn't said anything yet, you should greet them. All decisions for actions or responses or decisions to not say anything at this particular moment should be based of of CONVERSATIONAL CONTEXT and what you think the intent of any people you know, see, or don't see are"
+                                "Motion observed near the counter. Check who's approaching."
                             )
                         )
                     elif (time.time() - self.last_motion_event_time) > self.motion_state_decay:
