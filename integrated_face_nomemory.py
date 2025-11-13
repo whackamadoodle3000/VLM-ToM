@@ -17,7 +17,6 @@ import argparse
 
 from google import genai
 from google.genai import types
-from face_reid import FaceReID
 
 
 # --- DEBUG FLAG ---
@@ -26,12 +25,12 @@ DEBUG = True
 LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 LOG_FILE = os.path.join(
-    LOG_DIR, f"integrated_face_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    LOG_DIR, f"integrated_face_nomemory_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 )
 
 
 def setup_logging():
-    logger = logging.getLogger("integrated_face")
+    logger = logging.getLogger("integrated_face_nomemory")
     logger.setLevel(logging.DEBUG if DEBUG else logging.INFO)
     if logger.handlers:
         return logger
@@ -98,148 +97,21 @@ CHUNK_SIZE = 1024
 
 MODEL = "gemini-2.5-flash-native-audio-preview-09-2025"
 DEFAULT_MODE = "camera"
-MEMORY_CACHE_FILE = "person_memory_cache.json"
-RESET_MEMORY_ON_START = True
 
 client = genai.Client(api_key="", http_options={"api_version": "v1alpha"})
 
 
-class PersonMemoryCache:
-    """Persistent memory cache for storing information about each person."""
-    
-    def __init__(self, cache_file=MEMORY_CACHE_FILE, reset_on_start=RESET_MEMORY_ON_START):
-        self.cache_file = cache_file
-        if reset_on_start and os.path.exists(self.cache_file):
-            try:
-                os.remove(self.cache_file)
-                DEBUG_PRINT(f"Resetting memory cache file at startup: {self.cache_file}")
-                log_event("memory_cache_reset", cache_file=self.cache_file)
-            except Exception as e:
-                DEBUG_PRINT(f"Failed to reset memory cache: {e}")
-                log_event("memory_cache_reset_error", cache_file=self.cache_file, error=str(e))
-        self.memories = {}  # pid -> memory dict
-        self.load_cache()
-    
-    def load_cache(self):
-        """Load existing memory cache from disk."""
-        if os.path.exists(self.cache_file):
-            try:
-                with open(self.cache_file, 'r') as f:
-                    self.memories = json.load(f)
-                DEBUG_PRINT(f"Loaded memory cache with {len(self.memories)} people.")
-                log_event("memory_cache_loaded", cache_file=self.cache_file, people=len(self.memories))
-            except Exception as e:
-                DEBUG_PRINT(f"Error loading cache: {e}")
-                log_event("memory_cache_load_error", cache_file=self.cache_file, error=str(e))
-                self.memories = {}
-        else:
-            DEBUG_PRINT("No existing memory cache found. Starting fresh.")
-            log_event("memory_cache_not_found", cache_file=self.cache_file)
-    
-    def save_cache(self):
-        """Save memory cache to disk."""
-        try:
-            with open(self.cache_file, 'w') as f:
-                json.dump(self.memories, f, indent=2)
-            DEBUG_PRINT(f"Saved memory cache with {len(self.memories)} people.")
-            log_event("memory_cache_saved", cache_file=self.cache_file, people=len(self.memories))
-        except Exception as e:
-            DEBUG_PRINT(f"Error saving cache: {e}")
-            log_event("memory_cache_save_error", cache_file=self.cache_file, error=str(e))
-    
-    def get_memory(self, pid):
-        """Get memory for a person ID."""
-        pid_str = str(pid)
-        if pid_str not in self.memories:
-            self.memories[pid_str] = {
-                "pid": pid,
-                "first_seen": time.time(),
-                "last_seen": time.time(),
-                "total_interactions": 0,
-                "conversation_history": [],
-                "observations": [],
-            }
-            log_event("memory_created", person_id=pid)
-        return self.memories[pid_str]
-    
-    def update_memory(self, pid, updates):
-        """Update memory for a person with new information."""
-        memory = self.get_memory(pid)
-        memory["last_seen"] = time.time()
-        
-        # Merge updates
-        DEBUG_PRINT(
-            f"Updating memory for person #{pid} with payload: {_convert_for_log(updates)}"
-        )
-        log_event("memory_update_request", person_id=pid, updates=updates)
-        for key, value in updates.items():
-            if key == "conversation_history" or key == "observations":
-                if value:
-                    timestamp = time.time()
-                    readable = datetime.datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
-                    memory[key].append({
-                        "timestamp": timestamp,
-                        "readable": readable,
-                        "content": value
-                    })
-            else:
-                memory[key] = value
-        
-        self.save_cache()
-        log_event("memory_updated", person_id=pid, updates=updates)
-        return memory
-    
-    def format_memory_for_prompt(self, pid):
-        """Format memory as text for inclusion in prompts."""
-        memory = self.get_memory(pid)
-        
-        # Calculate time since last seen
-        time_since_last = time.time() - memory["last_seen"]
-        if time_since_last < 15:
-            recency = "You last saw them just now in this same interaction"
-        elif time_since_last < 3600:
-            recency = f"{int(time_since_last/60)} minutes ago"
-        else:
-            recency = f"{int(time_since_last/3600)} hours ago"
-        
-        # Format conversation history
-        recent_convos = memory["conversation_history"]
-        convo_text = ""
-        if recent_convos:
-            convo_text = "Recent interactions:\n"
-            for c in recent_convos:
-                dt = datetime.datetime.fromtimestamp(c["timestamp"]).strftime("%H:%M:%S")
-                convo_text += f"  - [{dt}] {c['content']}\n"
-        
-        # Format observations
-        recent_obs = memory["observations"]
-        obs_text = ""
-        if recent_obs:
-            obs_text = "Observations:\n"
-            for o in recent_obs:
-                dt = datetime.datetime.fromtimestamp(o["timestamp"]).strftime("%H:%M:%S")
-                obs_text += f"  - [{dt}] {o['content']}\n"
-        
-        prompt = f"""[Person Memory - ID #{pid}]
-Last seen: {recency}
-Total interactions: {memory["total_interactions"]}
-{convo_text}{obs_text}"""
-
-        return prompt
-
-
-def Give_Sample(memory_cache, focus_pid):
+def Give_Sample():
     """Tool function for giving a sample."""
-    DEBUG_PRINT(f"Executing tool: Give_Sample for person #{focus_pid}")
-    log_event("tool_called", tool="Give_Sample", focus_pid=focus_pid)
-    
-    print(f"-----------------------------------> Giving sample to person #{focus_pid}")
-    
+    DEBUG_PRINT("Executing tool: Give_Sample")
+    log_event("tool_called", tool="Give_Sample")
+
+    print("-----------------------------------> Giving sample")
+
     return {
         "status": "Sample delivered successfully",
         "item": "nut bar",
         "name": "done",
-        "recipient_id": focus_pid
     }
 
 
@@ -248,7 +120,7 @@ pya = pyaudio.PyAudio()
 
 class AudioLoop:
     def __init__(self, video_mode=DEFAULT_MODE):
-        DEBUG_PRINT(f"Initializing AudioLoop with video_mode: {video_mode}")
+        DEBUG_PRINT(f"Initializing AudioLoop (no memory) with video_mode: {video_mode}")
         log_event("audio_loop_init", video_mode=video_mode)
         self.video_mode = video_mode
         self.audio_in_queue = None
@@ -258,103 +130,61 @@ class AudioLoop:
         self.output_stream = None
         self.running = True
         log_event("audio_loop_state", step="init_complete")
-        
-        # Memory cache
-        self.memory_cache = PersonMemoryCache()
-        
+
         # WebRTC VAD setup
         self.vad = None
         if WEBRTC_AVAILABLE:
             self.vad = webrtcvad.Vad(2)
             DEBUG_PRINT("WebRTC VAD initialized.")
             log_event("vad_initialized", mode=2)
-        
+
         # Echo prevention state
         self.is_ai_speaking = False
         self.ai_stop_time = 0
         self.min_delay_after_ai = 0.5
-        
+
         # Timers for continuous data sending
         self.last_video_send = 0
         self.base_video_send_interval = 5.0
-        self.active_video_send_interval = 2.0  # Increased from 1.0
-        self.motion_state_decay = 5.0  # Increased from 3.0
+        self.active_video_send_interval = 2.0
+        self.motion_state_decay = 5.0
         self.video_send_interval = self.base_video_send_interval
         self.last_audio_send = 0
         self.ambient_audio_interval = 1.0
         self.speaking_audio_interval = 0.3
-        self.min_send_bytes = int(SEND_SAMPLE_RATE * 0.25 * 2)
-        
+        self.min_send_bytes = int(SEND_SAMPLE_RATE * 0.12 * 2)
+
         # Voice detection state
-        self.min_volume_threshold = 0.0035
+        self.min_volume_threshold = 0.0025
         self.noise_floor = self.min_volume_threshold / 2
-        self.dynamic_threshold_ratio = 1.6
+        self.dynamic_threshold_ratio = 1.3
         self.is_person_speaking = False
 
         # Visual proactivity state
         self.last_frame_gray = None
         self.motion_pixel_threshold = 25
-        self.motion_trigger_ratio = 0.02
-        self.motion_cooldown = 2.0  # Increased from 0.25
+        self.motion_trigger_ratio = 0.045
+        self.motion_cooldown = 4.0
         self.last_motion_event_time = 0.0
         self.last_proactive_prompt_time = 0.0
-        self.proactive_prompt_cooldown = 5.0  # Increased from 0.25
+        self.proactive_prompt_cooldown = 5.0
+        self.last_proactive_prompt_text = None
 
-        # Memory reminder throttle
-        self.memory_reminder_cooldown = 8.0
-        self.last_memory_reminder_time = 0.0
-
-        # Presence tracking to capture "still here" and "left" observations
-        self.presence_note_interval = 90.0
-        self.presence_note_state = {}
-        self._currently_visible_pids = set()
-
-        # Face ReID with adaptive matching tuned to reduce duplicate IDs
-        self.reid = FaceReID(
-            max_age_s=600,
-            match_threshold=float(os.getenv("REID_BASE_THRESHOLD", "0.48")),
-            min_match_threshold=float(os.getenv("REID_MIN_THRESHOLD", "0.32")),
-            recent_return_window=float(os.getenv("REID_RETURN_WINDOW", "12.0")),
-            proximity_radius=float(os.getenv("REID_PROXIMITY_RADIUS", "250.0")),
-            proximity_bonus=float(os.getenv("REID_PROXIMITY_BONUS", "0.22")),
-            adaptive_rate=float(os.getenv("REID_ADAPTIVE_RATE", "0.24")),
-        )
-        self.current_focus_pid = None
-        self.last_memory_update = {}  # pid -> timestamp of last update
-        
         if WEBRTC_AVAILABLE:
             self.frame_duration_ms = 30
             self.frame_size = int(SEND_SAMPLE_RATE * self.frame_duration_ms / 1000)
             self.audio_buffer = bytearray()
-        
-        # Configure tools with memory context
+
+        # Only Give_Sample tool is available without memory
         self.tools = [
             {"function_declarations": [
                 {
                     "name": "Give_Sample",
-                    "description": "By calling this function, you open a hatch that deposits one sample to the person you're currently focused on, and they take the sample."
-                },
-                {
-                    "name": "Update_Person_Memory",
-                    "description": "Update your memory about a person. Use this to record observations, preferences, quotes of what the person said, or state changes. Any time you learn any information about the person, including what they said or what you did for said to them, then use this tool. Use this AS OFTEN AS POSSIBLE.",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "person_id": {
-                                "type": "integer",
-                                "description": "The person ID to update"
-                            },
-                            "observation": {
-                                "type": "string",
-                                "description": "New observation about the person"
-                            },
-                        },
-                        "required": ["person_id"]
-                    }
+                    "description": "By calling this function, you open a hatch that deposits one sample to the person you're currently talking to, and they take the sample."
                 }
             ]}
         ]
-        
+
         DEBUG_PRINT("AudioLoop initialized successfully.")
 
     async def trigger_proactive_prompt(self, text):
@@ -368,7 +198,6 @@ class AudioLoop:
             DEBUG_PRINT("Skipping proactive prompt due to cooldown.")
             return
 
-        now = time.time()
         readable_now = datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d %H:%M:%S")
         self.last_proactive_prompt_time = now
         prompt_text = f"[Operator Guidance] @ epoch {now:.0f} (local {readable_now}) {text}"
@@ -390,42 +219,13 @@ class AudioLoop:
         except Exception as e:
             DEBUG_PRINT(f"Failed to send proactive prompt: {e}")
 
-    async def send_memory_reminder(self):
-        """Nudge the model to update memory after a new interaction."""
-        if not self.session:
-            DEBUG_PRINT("No active session; skipping memory reminder.")
-            return
-
-        now = time.time()
-        readable_now = datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d %H:%M:%S")
-        reminder_text = (
-            f"[Operator Guidance] Memory reminder @ current time epoch {now:.0f} (local {readable_now}): "
-            "Review the most recent exchange and call Update_Person_Memory for any new facts, names, preferences, beliefs, actions, quotes, emotions, or "
-            "timing details, etc. you just observed (for example, if someone is still waiting or has left). "
-            "Before you log a note, glance at their existing memory and avoid repeating anything you've just stored (see timestamps).", 
-        )
-        DEBUG_PRINT(f"Triggering memory reminder: {reminder_text}")
-        log_event("memory_reminder_sent", text=reminder_text)
-        try:
-            await self.session.send_client_content(
-                turns={
-                    "parts": [
-                        {
-                            "text": reminder_text
-                        }
-                    ]
-                }
-            )
-        except Exception as e:
-            DEBUG_PRINT(f"Failed to send memory reminder: {e}")
-            log_event("memory_reminder_error", error=str(e))
-
     def calculate_volume(self, audio_data):
         """Calculate RMS volume of audio data."""
         try:
             audio_np = np.frombuffer(audio_data, dtype=np.int16)
-            if len(audio_np) == 0: return 0.0
-            rms = np.sqrt(np.mean(audio_np.astype(np.float32)**2))
+            if len(audio_np) == 0:
+                return 0.0
+            rms = np.sqrt(np.mean(audio_np.astype(np.float32) ** 2))
             return rms / 32768.0
         except Exception as e:
             DEBUG_PRINT(f"Error calculating volume: {e}")
@@ -443,7 +243,7 @@ class AudioLoop:
         adaptive_threshold = max(self.min_volume_threshold,
                                  self.dynamic_threshold_ratio * self.noise_floor)
         volume_detected = volume > adaptive_threshold
-        
+
         webrtc_detected = False
         if self.vad and WEBRTC_AVAILABLE:
             try:
@@ -456,7 +256,7 @@ class AudioLoop:
                         break
             except Exception as e:
                 DEBUG_PRINT(f"Error in WebRTC VAD processing: {e}")
-        
+
         return volume_detected or webrtc_detected
 
     async def send_text(self):
@@ -484,86 +284,12 @@ class AudioLoop:
                 )
                 log_event("llm_text_outbound", source="user_input", payload=turns_payload)
                 await self.session.send_client_content(turns=turns_payload)
-
-                if self.current_focus_pid is not None and text.strip():
-                    convo_entry = f"User: {text.strip()}"
-                    DEBUG_PRINT(
-                        f"Recording user conversation entry for person #{self.current_focus_pid}: {convo_entry}"
-                    )
-                    log_event(
-                        "conversation_logged",
-                        person_id=self.current_focus_pid,
-                        role="user",
-                        text=text.strip(),
-                    )
-                    self.memory_cache.update_memory(
-                        self.current_focus_pid,
-                        {"conversation_history": convo_entry}
-                    )
             except EOFError:
                 break
         DEBUG_PRINT("send_text task finished.")
 
-    def _choose_focus_pid(self, reid_results, width, height):
-        """Choose which person to focus on (usually closest to center)."""
-        if not reid_results:
-            self.current_focus_pid = None
-            return
-        cx0, cy0 = width / 2.0, height / 2.0
-        best_pid, best_d = None, 1e18
-        for r in reid_results:
-            x1, y1, x2, y2 = r["bbox"]
-            cx, cy = (x1 + x2) / 2.0, (y1 + y2) / 2.0
-            d = (cx - cx0) ** 2 + (cy - cy0) ** 2
-            if d < best_d:
-                best_d, best_pid = d, r["pid"]
-        self.current_focus_pid = best_pid
-
-    def _get_person_label(self, pid, memory):
-        return f"Person #{pid}"
-
-    def _handle_presence_notes(self, reid_results):
-        """Automatically log notes when people stay for a while or depart."""
-        current_time = time.time()
-        current_pids = {r["pid"] for r in reid_results}
-
-        # Notes for people currently present
-        for pid in current_pids:
-            memory = self.memory_cache.get_memory(pid)
-            label = self._get_person_label(pid, memory)
-            state = self.presence_note_state.get(pid)
-            if state is None:
-                # First time we've seen this person in the current session; start the timer.
-                state = {"last_presence_note": current_time, "status": "present"}
-                self.presence_note_state[pid] = state
-            else:
-                elapsed = current_time - state.get("last_presence_note", 0.0)
-                if elapsed >= self.presence_note_interval:
-                    observation = f"{label} is still at the counter."
-                    self.memory_cache.update_memory(pid, {"observations": observation})
-                    state["last_presence_note"] = current_time
-                    state["status"] = "present"
-
-        # Notes for people who have left
-        departed_pids = self._currently_visible_pids - current_pids
-        for pid in departed_pids:
-            state = self.presence_note_state.get(pid)
-            if state is None:
-                state = {"last_presence_note": 0.0, "status": "unknown"}
-                self.presence_note_state[pid] = state
-            elapsed = current_time - state.get("last_presence_note", 0.0)
-            if state.get("status") != "left" or elapsed >= self.presence_note_interval:
-                memory = self.memory_cache.get_memory(pid)
-                label = self._get_person_label(pid, memory)
-                observation = f"{label} left the counter."
-                self.memory_cache.update_memory(pid, {"observations": observation})
-                state["last_presence_note"] = current_time
-                state["status"] = "left"
-
-        self._currently_visible_pids = current_pids
-
     def _get_frame(self, cap, detect_motion=False):
-        """Helper to capture and process one camera frame with memory integration."""
+        """Helper to capture and process one camera frame."""
         ret, frame = cap.read()
         if not ret:
             return (None, False, None, None) if detect_motion else (None, None, None, None)
@@ -586,62 +312,13 @@ class AudioLoop:
                     motion_detected = True
                     self.last_motion_event_time = time.time()
                     guidance_msgs.append(
-                        "Motion observed near the counter. Check who's approaching."
+                        "Motion observed near the counter. Someone might be approaching. Respond according to their intent."
                     )
                 self.last_frame_gray = gray
 
-        # ReID & focus selection
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        H, W = frame.shape[:2]
-        reid_results = self.reid.process_frame(frame_rgb)
-        self._choose_focus_pid(reid_results, W, H)
-
-        # Build memory-aware guidance
-        if reid_results:
-            memory_context = []
-            for r in reid_results:
-                pid = r["pid"]
-                memory = self.memory_cache.get_memory(pid)
-                
-                # Check if this is a new sighting (first time in this session)
-                if memory["total_interactions"] == 0:
-                    memory_context.append(f"New person (ID #{pid}) detected at the counter.")
-                    self.memory_cache.update_memory(pid, {
-                        "total_interactions": 1,
-                        "observations": "First appearance at the counter"
-                    })
-                else:
-                    # Update last seen
-                    time_since = time.time() - memory["last_seen"]
-                    if time_since > 300:  # 5 minutes
-                        memory_context.append(f"Person #{pid} returned after {int(time_since/60)} minutes.")
-                    
-                    # Include their full memory
-                    memory_text = self.memory_cache.format_memory_for_prompt(pid)
-                    memory_context.append(memory_text)
-                
-                # Update interaction count
-                self.memory_cache.update_memory(pid, {
-                    "total_interactions": memory["total_interactions"] + 1
-                })
-            
-            if memory_context:
-                guidance_msgs.extend(memory_context)
-
-        # Presence based observations (still here / left)
-        self._handle_presence_notes(reid_results)
-
-        # Optional debug drawing
-        for r in reid_results:
-            x1, y1, x2, y2 = r["bbox"]
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            memory = self.memory_cache.get_memory(r["pid"])
-            label = f"ID:{r['pid']}"
-            cv2.putText(frame, label, (x1, max(0, y1 - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-
-        display_frame = frame.copy()
-
         # Encode & return
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        display_frame = frame.copy()
         img = PIL.Image.fromarray(frame_rgb)
         img.thumbnail([600, 338])
         with io.BytesIO() as image_io:
@@ -649,7 +326,6 @@ class AudioLoop:
             blob = types.Blob(mime_type="image/jpeg", data=image_io.getvalue())
 
         guidance_text = "\n".join(guidance_msgs) if guidance_msgs else None
-        print(f"guidance_text: {guidance_text}")
         if detect_motion:
             return blob, motion_detected, guidance_text, display_frame
         return blob, None, guidance_text, display_frame
@@ -739,7 +415,6 @@ class AudioLoop:
                     await self.out_queue.put(blob)
                     self.last_video_send = time.time()
 
-                    # Display the frame being sent
                     try:
                         np_frame = np.frombuffer(blob.data, dtype=np.uint8)
                         frame_bgr = cv2.imdecode(np_frame, cv2.IMREAD_COLOR)
@@ -782,7 +457,7 @@ class AudioLoop:
         )
         DEBUG_PRINT("Microphone stream opened.")
         log_event("microphone_opened", device=mic_info.get("name"))
-        
+
         audio_accumulator = bytearray()
         while self.running:
             try:
@@ -835,9 +510,6 @@ class AudioLoop:
                         audio_accumulator.clear()
                         self.last_audio_send = current_time
 
-                    if self.current_focus_pid is not None:
-                        asyncio.create_task(self.send_memory_reminder())
-
                 send_interval = self.speaking_audio_interval if self.is_person_speaking else self.ambient_audio_interval
                 if current_time - self.last_audio_send >= send_interval and len(audio_accumulator) > 0 and can_send:
                     DEBUG_PRINT(f"Periodic send ({'speaking' if self.is_person_speaking else 'ambient'}).")
@@ -845,7 +517,7 @@ class AudioLoop:
                     await self.out_queue.put(types.Blob(data=bytes(audio_accumulator), mime_type=f"audio/pcm;rate={SEND_SAMPLE_RATE}"))
                     audio_accumulator.clear()
                     self.last_audio_send = current_time
-                
+
             except Exception as e:
                 DEBUG_PRINT(f"Error in listen_audio loop: {e}")
                 log_event("listen_audio_error", error=str(e))
@@ -869,102 +541,18 @@ class AudioLoop:
                         DEBUG_PRINT(f"Received text from model: '{chunk.text}'")
                         log_event("model_text_received", text=chunk.text)
 
-                        if self.current_focus_pid is not None and chunk.text.strip():
-                            convo_entry = f"Assistant: {chunk.text.strip()}"
-                            DEBUG_PRINT(
-                                f"Recording assistant conversation entry for person #{self.current_focus_pid}: {convo_entry}"
-                            )
-                            log_event(
-                                "conversation_logged",
-                                person_id=self.current_focus_pid,
-                                role="assistant",
-                                text=chunk.text.strip(),
-                            )
-                            self.memory_cache.update_memory(
-                                self.current_focus_pid,
-                                {"conversation_history": convo_entry}
-                            )
-
                     if hasattr(chunk, "tool_call") and hasattr(chunk.tool_call, "function_calls"):
                         for fc in chunk.tool_call.function_calls:
                             print(f"\n[Tool Call]: {fc.name}")
                             DEBUG_PRINT(f"Model called tool: {fc.name} with ID: {fc.id}")
                             log_event("model_tool_call", name=fc.name, call_id=fc.id, args=_convert_for_log(fc.args))
-                            
+
                             if fc.name == "Give_Sample":
-                                result = Give_Sample(self.memory_cache, self.current_focus_pid)
-                                
-                                # Mark person as served in ReID too
-                                if self.current_focus_pid is not None:
-                                    self.reid.mark_served(self.current_focus_pid)
-                                    DEBUG_PRINT(f"Marked person #{self.current_focus_pid} as served.")
-                                    log_event("person_marked_served", person_id=self.current_focus_pid)
-                                
+                                result = Give_Sample()
                                 fr = types.FunctionResponse(id=fc.id, name=fc.name, response=result)
                                 DEBUG_PRINT(f"Sending tool response for {fc.name}: {result}")
                                 log_event("tool_response_sent", tool=fc.name, response=result)
                                 await self.session.send_tool_response(function_responses=[fr])
-                            
-                            elif fc.name == "Update_Person_Memory":
-                                args = json.loads(fc.args) if isinstance(fc.args, str) else fc.args
-                                pid = args.get("person_id")
-                                DEBUG_PRINT(
-                                    f"Update_Person_Memory tool called with raw args: {_convert_for_log(args)}"
-                                )
-                                log_event("memory_tool_invocation", name=fc.name, args=args)
-
-                                updates = {}
-                                if "observation" in args:
-                                    updates["observations"] = args["observation"]
-                                if "conversation" in args:
-                                    updates["conversation_history"] = args["conversation"]
-
-                                if pid and updates:
-                                    DEBUG_PRINT(
-                                        f"Applying memory update for PID {pid}: {_convert_for_log(updates)}"
-                                    )
-                                    log_event(
-                                        "memory_update_payload",
-                                        person_id=pid,
-                                        updates=updates,
-                                        cache_exists=pid in self.memory_cache.memories,
-                                    )
-                                    before_snapshot = _convert_for_log(
-                                        self.memory_cache.memories.get(str(pid), {})
-                                    )
-                                    log_event(
-                                        "memory_before_update",
-                                        person_id=pid,
-                                        memory=before_snapshot,
-                                    )
-
-                                    memory_after = self.memory_cache.update_memory(pid, updates)
-
-                                    log_event(
-                                        "memory_after_update",
-                                        person_id=pid,
-                                        memory=_convert_for_log(memory_after),
-                                    )
-                                    DEBUG_PRINT(
-                                        f"Updated memory for person #{pid}. Total observations:"
-                                        f" {len(memory_after.get('observations', []))}."
-                                    )
-                                else:
-                                    log_event(
-                                        "memory_update_skipped",
-                                        person_id=pid,
-                                        reason="missing pid or updates",
-                                        args=args,
-                                    )
-                                    DEBUG_PRINT(
-                                        f"Skipping memory update. pid={pid}, updates={_convert_for_log(updates)}"
-                                    )
-
-                                result = {"status": "Memory updated", "person_id": pid, "updates_applied": bool(updates)}
-                                fr = types.FunctionResponse(id=fc.id, name=fc.name, response=result)
-                                log_event("tool_response_sent", tool=fc.name, response=result)
-                                await self.session.send_tool_response(function_responses=[fr])
-                            
             except Exception as e:
                 DEBUG_PRINT(f"Error in receive_audio: {e}")
                 log_event("receive_audio_error", error=str(e))
@@ -982,33 +570,31 @@ class AudioLoop:
         DEBUG_PRINT("Audio output stream opened.")
         buffered = bytearray()
         silence_count = 0
-        
+
         while self.running:
             try:
                 bytestream = await asyncio.wait_for(self.audio_in_queue.get(), timeout=0.5)
-                silence_count = 0  # Reset silence counter when we get data
-                
+                silence_count = 0
+
                 if not self.is_ai_speaking:
                     self.is_ai_speaking = True
                     DEBUG_PRINT("AI started speaking. Recording is paused.")
                     log_event("ai_speaking_state", state="started")
-                
+
                 buffered.extend(bytestream)
 
-                # Play immediately when buffer has enough data
-                if len(buffered) >= int(RECEIVE_SAMPLE_RATE * 0.05 * 2):  # 50ms buffer
+                if len(buffered) >= int(RECEIVE_SAMPLE_RATE * 0.05 * 2):
                     try:
                         await asyncio.to_thread(self.output_stream.write, bytes(buffered))
                         buffered.clear()
                     except Exception as e:
                         DEBUG_PRINT(f"Error writing to output stream: {e}")
                         log_event("play_audio_error", error=str(e))
-                        
+
             except asyncio.TimeoutError:
                 silence_count += 1
-                
+
                 if self.is_ai_speaking:
-                    # Flush any remaining audio
                     if len(buffered) > 0:
                         try:
                             await asyncio.to_thread(self.output_stream.write, bytes(buffered))
@@ -1016,19 +602,18 @@ class AudioLoop:
                         except Exception as e:
                             DEBUG_PRINT(f"Error flushing output stream: {e}")
                             log_event("play_audio_error", error=str(e))
-                    
-                    # Only mark as stopped after 2 consecutive timeouts (1 second)
+
                     if silence_count >= 2:
                         self.is_ai_speaking = False
                         self.ai_stop_time = time.time()
                         DEBUG_PRINT(f"AI stopped speaking. Recording will resume after {self.min_delay_after_ai}s delay.")
                         log_event("ai_speaking_state", state="stopped", delay=self.min_delay_after_ai)
                         silence_count = 0
-                        
+
             except Exception as e:
                 DEBUG_PRINT(f"Error in play_audio: {e}")
                 log_event("play_audio_error", error=str(e))
-                
+
         DEBUG_PRINT("play_audio task finished.")
         log_event("play_audio_stopped")
 
@@ -1037,10 +622,7 @@ class AudioLoop:
         DEBUG_PRINT("Starting cleanup.")
         log_event("cleanup_started")
         self.running = False
-        
-        # Save memory cache one final time
-        self.memory_cache.save_cache()
-        
+
         if self.audio_stream and self.audio_stream.is_active():
             self.audio_stream.stop_stream()
             self.audio_stream.close()
@@ -1063,7 +645,7 @@ class AudioLoop:
         try:
             DEBUG_PRINT(f"Connecting to model: {MODEL}")
             log_event("run_start", model=MODEL)
-            
+
             CONFIG = {
                 "response_modalities": ["AUDIO"],
                 "speech_config": {
@@ -1077,32 +659,18 @@ class AudioLoop:
 You will receive continuous audio and video feeds. Based on what you see and hear:
 
 - Proactively greet customers who approach or look interested in samples
-- You have persistent memory of every person you interact with, including their ID number
-- Always reference your memory when you see someone
 - Each person should only ever get ONE sample
 - No one has received samples before you started giving them out
 - The sample is a nut bar
 - Be friendly and conversational, but keep responses concise
 - You can see people even when they're not talking - feel free to initiate conversation!
 - Pay attention to the flow of time: note when someone lingers, returns later, or leaves the counter.
-- Use the Update_Person_Memory tool to record observations, preferences, and state changes about people. Do this as often as possible whenever you get or infer ANY new piece of information.
-- When adding a note, briefly review the existing memory entry first so you don’t log the same observation twice; refine or expand instead of repeating.
-
-You may also receive messages tagged with [Operator Guidance] or [Person Memory]. These provide context about people in view. Treat these as internal information: think through them silently, and only speak when you choose to engage customers. Never repeat guidance or memory details verbatim to customers - use them naturally in conversation.
-
-When you learn **any** new fact about someone (their name, what they said, a preference, a promise you made, something they did, how they reacted, their emotions, etc.), immediately call the `Update_Person_Memory` tool with that information before continuing the conversation. Do not wait until later—log it right away so you remember on the next turn.
-
-Example of how to use tools:
-- "Hey, I'm sam, could I have a nut bar?"
-  -> You should:
-     1. Politely respond to Sam.
-     2. Call `Update_Person_Memory` with `person_id` = Sam's ID and `observation` = "Person introduced themselves as Sam and asked for a nut bar."
-
-If you notice multiple new facts in one turn, make multiple tool calls (one per fact) so each detail is stored clearly. Avoid logging vague or generic statements; make each observation specific.
+- Use the Give_Sample tool whenever you actually hand someone a sample.
+- You may also receive messages tagged with [Operator Guidance]. Treat these as internal instructions: think through them silently, decide whether customer-facing action is required, and only speak when you choose to engage. Never repeat guidance verbatim to customers - use them naturally in conversation.
 """,
                 "tools": self.tools,
             }
-            
+
             async with client.aio.live.connect(model=MODEL, config=CONFIG) as session, \
                        asyncio.TaskGroup() as tg:
                 DEBUG_PRINT("Model session started.")
@@ -1147,7 +715,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     main = AudioLoop(video_mode=args.mode)
     log_event("main_started", mode=args.mode)
-    
+
     try:
         DEBUG_PRINT("Starting application run loop.")
         asyncio.run(main.run())

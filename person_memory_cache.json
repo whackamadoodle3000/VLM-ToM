@@ -1,145 +1,40 @@
 {
   "1": {
     "pid": 1,
-    "first_seen": 1762824032.7165198,
-    "last_seen": 1762824122.594822,
-    "total_interactions": 19,
+    "first_seen": 1763017991.732928,
+    "last_seen": 1763018058.326897,
+    "total_interactions": 25,
     "conversation_history": [],
     "observations": [
       {
-        "timestamp": 1762824032.716631,
-        "readable": "2025-11-10 20:20:32",
+        "timestamp": 1763017991.733087,
+        "readable": "2025-11-13 02:13:11",
         "content": "First appearance at the counter"
       },
       {
-        "timestamp": 1762824034.4342651,
-        "readable": "2025-11-10 20:20:34",
-        "content": "Person approached the counter and was greeted."
+        "timestamp": 1763017994.538134,
+        "readable": "2025-11-13 02:13:14",
+        "content": "Person approached the counter and was offered a nut bar sample."
       },
       {
-        "timestamp": 1762824046.860595,
-        "readable": "2025-11-10 20:20:46",
-        "content": "Person accepted a sample."
+        "timestamp": 1763018008.542872,
+        "readable": "2025-11-13 02:13:28",
+        "content": "Person accepted the offer and received a nut bar sample."
       },
       {
-        "timestamp": 1762824053.354311,
-        "readable": "2025-11-10 20:20:53",
-        "content": "Person accepted a sample and introduced himself as Pranav."
+        "timestamp": 1763018010.970458,
+        "readable": "2025-11-13 02:13:30",
+        "content": "Person accepted the offer and received a nut bar sample."
       },
       {
-        "timestamp": 1762824061.491752,
-        "readable": "2025-11-10 20:21:01",
-        "content": "Pranav left the counter."
-      },
-      {
-        "timestamp": 1762824068.307662,
-        "readable": "2025-11-10 20:21:08",
+        "timestamp": 1763018012.5145228,
+        "readable": "2025-11-13 02:13:32",
         "content": "Person #1 left the counter."
       },
       {
-        "timestamp": 1762824079.101235,
-        "readable": "2025-11-10 20:21:19",
-        "content": "Pranav returned and asked for another sample. Reminded him he already had one."
-      }
-    ]
-  },
-  "2": {
-    "pid": 2,
-    "first_seen": 1762824093.299716,
-    "last_seen": 1762824095.6921449,
-    "total_interactions": 2,
-    "conversation_history": [],
-    "observations": [
-      {
-        "timestamp": 1762824093.299896,
-        "readable": "2025-11-10 20:21:33",
-        "content": "First appearance at the counter"
-      },
-      {
-        "timestamp": 1762824095.692194,
-        "readable": "2025-11-10 20:21:35",
-        "content": "Person #2 left the counter."
-      }
-    ]
-  },
-  "3": {
-    "pid": 3,
-    "first_seen": 1762824095.6900322,
-    "last_seen": 1762824122.579947,
-    "total_interactions": 11,
-    "conversation_history": [],
-    "observations": [
-      {
-        "timestamp": 1762824095.69054,
-        "readable": "2025-11-10 20:21:35",
-        "content": "First appearance at the counter"
-      },
-      {
-        "timestamp": 1762824097.835445,
-        "readable": "2025-11-10 20:21:37",
-        "content": "Person approached the counter and was greeted."
-      },
-      {
-        "timestamp": 1762824104.3326058,
-        "readable": "2025-11-10 20:21:44",
-        "content": "Person accepted a sample."
-      }
-    ]
-  },
-  "4": {
-    "pid": 4,
-    "first_seen": 1762824095.6915488,
-    "last_seen": 1762824100.208569,
-    "total_interactions": 2,
-    "conversation_history": [],
-    "observations": [
-      {
-        "timestamp": 1762824095.691637,
-        "readable": "2025-11-10 20:21:35",
-        "content": "First appearance at the counter"
-      },
-      {
-        "timestamp": 1762824097.860221,
-        "readable": "2025-11-10 20:21:37",
-        "content": "Person approached the counter and was greeted."
-      },
-      {
-        "timestamp": 1762824100.208621,
-        "readable": "2025-11-10 20:21:40",
-        "content": "Person #4 left the counter."
-      }
-    ]
-  },
-  "5": {
-    "pid": 5,
-    "first_seen": 1762824100.2071009,
-    "last_seen": 1762824122.5895529,
-    "total_interactions": 10,
-    "conversation_history": [],
-    "observations": [
-      {
-        "timestamp": 1762824100.207814,
-        "readable": "2025-11-10 20:21:40",
-        "content": "First appearance at the counter"
-      }
-    ]
-  },
-  "6": {
-    "pid": 6,
-    "first_seen": 1762824117.0381281,
-    "last_seen": 1762824119.764402,
-    "total_interactions": 2,
-    "conversation_history": [],
-    "observations": [
-      {
-        "timestamp": 1762824117.038197,
-        "readable": "2025-11-10 20:21:57",
-        "content": "First appearance at the counter"
-      },
-      {
-        "timestamp": 1762824119.764448,
-        "readable": "2025-11-10 20:21:59",
-        "content": "Person #6 left the counter."
+        "timestamp": 1763018056.5291321,
+        "readable": "2025-11-13 02:14:16",
+        "content": "Person returned to the counter. Reminded them they already received a sample."
       }
     ]
   }
