@@ -1,0 +1,1009 @@
+2025-11-13 02:17:29,933 [DEBUG] Logging initialized. Log file: /Users/pranavtadepalli/Documents/GitHub/VLM-ToM/logs/integrated_face_nomemory_20251113_021729.log
+2025-11-13 02:17:30,249 [DEBUG] Initializing AudioLoop (no memory) with video_mode: camera
+2025-11-13 02:17:30,249 [INFO] EVENT {"event": "audio_loop_init", "details": {"video_mode": "camera"}}
+2025-11-13 02:17:30,249 [INFO] EVENT {"event": "audio_loop_state", "details": {"step": "init_complete"}}
+2025-11-13 02:17:30,249 [DEBUG] WebRTC VAD initialized.
+2025-11-13 02:17:30,249 [INFO] EVENT {"event": "vad_initialized", "details": {"mode": 2}}
+2025-11-13 02:17:30,249 [DEBUG] AudioLoop initialized successfully.
+2025-11-13 02:17:30,249 [INFO] EVENT {"event": "main_started", "details": {"mode": "camera"}}
+2025-11-13 02:17:30,249 [DEBUG] Starting application run loop.
+2025-11-13 02:17:30,249 [DEBUG] Connecting to model: gemini-2.5-flash-native-audio-preview-09-2025
+2025-11-13 02:17:30,249 [INFO] EVENT {"event": "run_start", "details": {"model": "gemini-2.5-flash-native-audio-preview-09-2025"}}
+2025-11-13 02:17:30,459 [DEBUG] Model session started.
+2025-11-13 02:17:30,469 [INFO] EVENT {"event": "model_session_started", "details": {}}
+2025-11-13 02:17:30,496 [DEBUG] All tasks created.
+2025-11-13 02:17:30,497 [INFO] EVENT {"event": "tasks_started", "details": {"tasks": ["send_text", "send_realtime", "listen_audio", "get_frames", "receive_audio", "play_audio"]}}
+2025-11-13 02:17:30,497 [DEBUG] Starting send_text task.
+2025-11-13 02:17:30,497 [DEBUG] Starting send_realtime task.
+2025-11-13 02:17:30,497 [DEBUG] Starting listen_audio task.
+2025-11-13 02:17:30,498 [DEBUG] Starting get_frames (camera) task.
+2025-11-13 02:17:30,500 [DEBUG] Starting receive_audio task.
+2025-11-13 02:17:30,500 [INFO] EVENT {"event": "receive_audio_started", "details": {}}
+2025-11-13 02:17:30,500 [DEBUG] Starting play_audio task.
+2025-11-13 02:17:30,500 [INFO] EVENT {"event": "play_audio_started", "details": {}}
+2025-11-13 02:17:30,555 [DEBUG] Audio output stream opened.
+2025-11-13 02:17:30,690 [DEBUG] Microphone stream opened.
+2025-11-13 02:17:30,693 [INFO] EVENT {"event": "microphone_opened", "details": {"device": "MacBook Pro Microphone"}}
+2025-11-13 02:17:30,767 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:30,814 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:30,816 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 2048, "trigger": "periodic"}}
+2025-11-13 02:17:30,818 [DEBUG] Sending audio data (2048 bytes).
+2025-11-13 02:17:30,820 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 2048}}
+2025-11-13 02:17:30,875 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:30,888 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:30,953 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,014 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,081 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,146 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,209 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,273 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,338 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,403 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,465 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,537 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,597 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,658 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,768 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,789 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,790 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:31,790 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:31,805 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:31,805 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:31,852 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,915 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:31,978 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,041 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,107 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,166 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,233 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,294 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,359 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,398 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:32,426 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,492 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,508 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 3971}}
+2025-11-13 02:17:32,733 [DEBUG] Sending image data (3971 bytes).
+2025-11-13 02:17:32,733 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 3971}}
+2025-11-13 02:17:32,734 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,734 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,734 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,747 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,806 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,806 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:32,806 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:32,806 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:32,806 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:32,872 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:32,949 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,037 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,065 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,144 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,260 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,261 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,319 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,383 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,446 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,509 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,576 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,637 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,705 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,770 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,830 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,830 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:33,830 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:33,830 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:33,831 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:33,896 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:33,991 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,050 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,089 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,158 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,229 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,293 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,347 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,411 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,524 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,536 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,598 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,663 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,728 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,793 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,857 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,858 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:34,858 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:34,858 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:34,858 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:34,923 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:34,983 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,045 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,113 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,175 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,241 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,307 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,366 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,431 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,498 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,558 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,626 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,686 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,751 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,816 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,879 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:35,879 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:35,879 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:35,879 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:35,879 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:35,944 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,008 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,070 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,137 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,197 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,265 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,330 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,409 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,460 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,522 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,617 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,661 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,714 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,778 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,838 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,904 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:36,904 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:36,904 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:36,905 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:36,905 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:36,970 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,030 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,097 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,162 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,225 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,286 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,352 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,418 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,479 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,539 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:37,544 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,610 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,632 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 19973}}
+2025-11-13 02:17:37,706 [INFO] EVENT {"event": "motion_detected", "details": {}}
+2025-11-13 02:17:37,706 [DEBUG] Sending image data (19973 bytes).
+2025-11-13 02:17:37,706 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 19973}}
+2025-11-13 02:17:37,707 [DEBUG] Triggering proactive prompt: [Operator Guidance] @ epoch 1763018258 (local 2025-11-13 02:17:37) Motion observed near the counter. Someone might be approaching. Respond according to their intent.
+2025-11-13 02:17:37,707 [INFO] EVENT {"event": "proactive_prompt", "details": {"prompt": "[Operator Guidance] @ epoch 1763018258 (local 2025-11-13 02:17:37) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}}
+2025-11-13 02:17:37,707 [DEBUG] Sending client content to model (proactive): {"parts": [{"text": "[Operator Guidance] @ epoch 1763018258 (local 2025-11-13 02:17:37) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}]}
+2025-11-13 02:17:37,707 [INFO] EVENT {"event": "llm_text_outbound", "details": {"source": "proactive_prompt", "payload": {"parts": [{"text": "<truncated>"}]}}}
+2025-11-13 02:17:37,707 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,737 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,799 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,864 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,929 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:37,929 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:37,929 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:37,930 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:37,930 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:37,990 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,059 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,119 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,188 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,247 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,312 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,374 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,443 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,504 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,571 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,630 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,725 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,785 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,826 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,890 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,964 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:38,964 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:38,964 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:38,965 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:38,965 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:39,020 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,080 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,142 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,208 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,273 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,338 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,403 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,462 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,526 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,593 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,636 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:39,658 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,673 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 19931}}
+2025-11-13 02:17:39,700 [DEBUG] Sending image data (19931 bytes).
+2025-11-13 02:17:39,700 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 19931}}
+2025-11-13 02:17:39,723 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,784 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,848 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,913 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,974 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:39,974 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:39,974 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:39,974 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:39,974 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:40,042 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,103 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,169 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,232 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,297 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,362 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,425 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,491 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,551 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,619 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,680 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,745 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,806 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,873 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,939 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:40,999 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,000 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:41,000 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:41,000 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:41,000 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:41,063 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,162 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,190 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,254 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,318 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,385 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,450 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,513 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,578 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,640 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,680 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:41,706 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,714 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 20001}}
+2025-11-13 02:17:41,759 [DEBUG] Sending image data (20001 bytes).
+2025-11-13 02:17:41,760 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 20001}}
+2025-11-13 02:17:41,767 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,833 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,895 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:41,962 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,021 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,022 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:42,022 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:42,022 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:42,022 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:42,086 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,152 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,214 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,280 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,342 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,409 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,470 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,535 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,599 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,666 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,726 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,792 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,857 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,923 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:42,983 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,048 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,048 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:43,048 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:43,048 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:43,048 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:43,122 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,180 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,240 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,306 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,371 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,440 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,500 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,564 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,622 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,719 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,748 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:43,775 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,819 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,885 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:43,956 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,017 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,021 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 19941}}
+2025-11-13 02:17:44,054 [DEBUG] Sending image data (19941 bytes).
+2025-11-13 02:17:44,054 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 19941}}
+2025-11-13 02:17:44,075 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,075 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:44,076 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:44,076 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:44,076 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:44,134 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,200 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,264 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,329 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,390 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,456 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,523 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,585 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,647 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,714 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,774 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,839 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,906 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:44,966 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,032 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,099 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,099 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:45,099 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:45,099 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:45,099 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:45,160 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,227 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,287 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,353 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,418 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,479 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,542 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,608 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,674 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,736 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,801 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,868 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,927 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:45,993 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,054 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,118 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,119 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:46,119 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:46,119 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:46,119 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:46,182 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,249 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,316 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,378 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,440 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,505 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,639 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,639 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,699 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,760 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,825 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,891 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:46,953 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,016 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,081 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,149 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,150 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:47,150 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:47,150 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:47,150 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:47,207 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,273 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,337 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,402 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,464 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,530 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,591 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,657 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,722 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,787 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,847 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,915 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:47,976 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,038 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,105 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,169 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,169 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:48,169 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:48,170 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:48,170 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:48,230 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,295 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,369 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,431 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,495 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,559 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,622 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,679 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,743 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,808 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,870 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:48,936 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,003 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,024 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:49,064 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,091 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 23017}}
+2025-11-13 02:17:49,113 [INFO] EVENT {"event": "motion_detected", "details": {}}
+2025-11-13 02:17:49,113 [DEBUG] Sending image data (23017 bytes).
+2025-11-13 02:17:49,113 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 23017}}
+2025-11-13 02:17:49,114 [DEBUG] Triggering proactive prompt: [Operator Guidance] @ epoch 1763018269 (local 2025-11-13 02:17:49) Motion observed near the counter. Someone might be approaching. Respond according to their intent.
+2025-11-13 02:17:49,114 [INFO] EVENT {"event": "proactive_prompt", "details": {"prompt": "[Operator Guidance] @ epoch 1763018269 (local 2025-11-13 02:17:49) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}}
+2025-11-13 02:17:49,114 [DEBUG] Sending client content to model (proactive): {"parts": [{"text": "[Operator Guidance] @ epoch 1763018269 (local 2025-11-13 02:17:49) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}]}
+2025-11-13 02:17:49,114 [INFO] EVENT {"event": "llm_text_outbound", "details": {"source": "proactive_prompt", "payload": {"parts": [{"text": "<truncated>"}]}}}
+2025-11-13 02:17:49,130 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,192 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,192 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:49,193 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:49,193 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:49,193 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:49,259 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,319 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,387 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,446 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,513 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,574 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,642 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,702 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,770 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,830 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,897 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:49,958 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,024 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,085 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,152 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,219 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,219 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:50,220 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:50,220 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:50,220 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:50,280 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,346 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,406 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,472 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,534 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,599 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,665 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,728 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,799 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,855 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,926 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:50,987 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,048 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,093 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:51,113 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,148 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 23280}}
+2025-11-13 02:17:51,170 [DEBUG] Sending image data (23280 bytes).
+2025-11-13 02:17:51,170 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 23280}}
+2025-11-13 02:17:51,174 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,241 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,241 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:51,241 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:51,241 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:51,241 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:51,303 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,370 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,435 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,496 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,558 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,626 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,690 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,754 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,814 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,881 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:51,943 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,008 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,088 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,139 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,203 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,264 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,264 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:52,264 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:52,264 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:52,265 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:52,329 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,391 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,458 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,519 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,587 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,647 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,715 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,773 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,838 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,903 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:52,969 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,035 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,098 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,155 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:53,166 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,225 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,290 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,290 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:53,290 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:53,291 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:53,292 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:53,372 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,420 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,483 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,593 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,614 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,674 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,748 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,806 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,873 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,930 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:53,991 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,001 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 23267}}
+2025-11-13 02:17:54,024 [INFO] EVENT {"event": "motion_detected", "details": {}}
+2025-11-13 02:17:54,024 [DEBUG] Sending image data (23267 bytes).
+2025-11-13 02:17:54,024 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 23267}}
+2025-11-13 02:17:54,054 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,120 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,182 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,250 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,310 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,310 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:54,310 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:54,311 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:54,311 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:54,376 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,441 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,503 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,567 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,634 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,696 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,762 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,824 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,886 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:54,953 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,019 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,079 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,145 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,212 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,275 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,334 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,334 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:55,334 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:55,334 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:55,334 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:55,398 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,462 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,527 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,592 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,658 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,717 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,783 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,849 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,910 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:55,977 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,007 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:56,040 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,104 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,169 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,234 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,297 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,360 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,360 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:56,360 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:56,360 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:56,360 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:56,424 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,512 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,557 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,622 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,703 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,745 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,828 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,903 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:56,942 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,017 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,030 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22367}}
+2025-11-13 02:17:57,084 [DEBUG] Sending image data (22367 bytes).
+2025-11-13 02:17:57,084 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22367}}
+2025-11-13 02:17:57,085 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,132 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,190 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,257 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,319 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,386 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,386 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:57,387 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:57,387 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:57,387 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:57,446 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,514 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,578 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,638 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,704 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,766 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,835 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,895 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:57,958 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,024 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,091 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,152 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,219 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,281 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,343 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,409 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,410 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:58,410 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:58,410 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:58,410 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:58,471 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,537 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,599 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,665 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,726 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,790 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,854 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,920 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:58,983 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,049 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,067 [DEBUG] Capturing camera frame.
+2025-11-13 02:17:59,168 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,199 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,243 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,306 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,371 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,434 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,435 [DEBUG] Periodic send (ambient).
+2025-11-13 02:17:59,435 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:17:59,435 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:17:59,436 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:17:59,505 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22632}}
+2025-11-13 02:17:59,528 [INFO] EVENT {"event": "motion_detected", "details": {}}
+2025-11-13 02:17:59,529 [DEBUG] Sending image data (22632 bytes).
+2025-11-13 02:17:59,529 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22632}}
+2025-11-13 02:17:59,530 [DEBUG] Triggering proactive prompt: [Operator Guidance] @ epoch 1763018280 (local 2025-11-13 02:17:59) Motion observed near the counter. Someone might be approaching. Respond according to their intent.
+2025-11-13 02:17:59,530 [INFO] EVENT {"event": "proactive_prompt", "details": {"prompt": "[Operator Guidance] @ epoch 1763018280 (local 2025-11-13 02:17:59) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}}
+2025-11-13 02:17:59,531 [DEBUG] Sending client content to model (proactive): {"parts": [{"text": "[Operator Guidance] @ epoch 1763018280 (local 2025-11-13 02:17:59) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}]}
+2025-11-13 02:17:59,531 [INFO] EVENT {"event": "llm_text_outbound", "details": {"source": "proactive_prompt", "payload": {"parts": [{"text": "<truncated>"}]}}}
+2025-11-13 02:17:59,534 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,563 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,621 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,687 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,751 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,816 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,883 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:17:59,944 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,010 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,070 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,136 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,203 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,262 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,330 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,391 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,456 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,457 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:00,457 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:00,457 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:00,457 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:00,520 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,587 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,646 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,714 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,775 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,842 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,902 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:00,969 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,030 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,098 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,159 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,226 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,286 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,352 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,418 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,482 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,482 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:01,483 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:01,483 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:01,483 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:01,509 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:01,553 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,645 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,735 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,740 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,803 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,852 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 20684}}
+2025-11-13 02:18:01,874 [DEBUG] Sending image data (20684 bytes).
+2025-11-13 02:18:01,874 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 20684}}
+2025-11-13 02:18:01,876 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,927 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:01,993 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,054 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,119 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,185 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,251 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,312 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,378 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,443 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,503 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,503 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:02,503 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:02,503 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:02,503 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:02,568 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,635 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,697 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,763 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,824 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,891 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:02,952 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,018 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,078 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,143 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,209 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,270 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,336 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,403 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,463 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,529 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,530 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:03,530 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:03,530 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:03,530 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:03,592 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,658 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,719 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,787 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,848 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,855 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:03,895 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22267}}
+2025-11-13 02:18:03,920 [INFO] EVENT {"event": "motion_detected", "details": {}}
+2025-11-13 02:18:03,920 [DEBUG] Sending image data (22267 bytes).
+2025-11-13 02:18:03,920 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22267}}
+2025-11-13 02:18:03,921 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:03,986 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,038 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,106 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,169 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,230 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,296 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,363 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,423 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,489 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,554 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,554 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:04,554 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:04,554 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:04,554 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:04,615 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,678 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,744 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,808 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,874 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:04,934 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,000 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,062 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,128 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,194 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,254 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,318 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,384 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,445 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,512 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,575 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,575 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:05,575 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:05,575 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:05,575 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:05,643 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,702 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,768 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,831 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,894 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:05,901 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:05,957 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22656}}
+2025-11-13 02:18:05,979 [DEBUG] Sending image data (22656 bytes).
+2025-11-13 02:18:05,979 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22656}}
+2025-11-13 02:18:05,980 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,023 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,088 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,149 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,219 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,283 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,345 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,411 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,470 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,534 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,603 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,603 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:06,603 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:06,603 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:06,603 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:06,662 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,728 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,790 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,856 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,919 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:06,985 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,048 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,110 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,176 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,240 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,307 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,370 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,432 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,497 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,562 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,622 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,622 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:07,622 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:07,622 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:07,622 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:07,687 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,756 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,817 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,878 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,944 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:07,960 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:08,008 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,011 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22547}}
+2025-11-13 02:18:08,033 [INFO] EVENT {"event": "motion_detected", "details": {}}
+2025-11-13 02:18:08,033 [DEBUG] Sending image data (22547 bytes).
+2025-11-13 02:18:08,033 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22547}}
+2025-11-13 02:18:08,034 [DEBUG] Triggering proactive prompt: [Operator Guidance] @ epoch 1763018288 (local 2025-11-13 02:18:08) Motion observed near the counter. Someone might be approaching. Respond according to their intent.
+2025-11-13 02:18:08,034 [INFO] EVENT {"event": "proactive_prompt", "details": {"prompt": "[Operator Guidance] @ epoch 1763018288 (local 2025-11-13 02:18:08) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}}
+2025-11-13 02:18:08,034 [DEBUG] Sending client content to model (proactive): {"parts": [{"text": "[Operator Guidance] @ epoch 1763018288 (local 2025-11-13 02:18:08) Motion observed near the counter. Someone might be approaching. Respond according to their intent."}]}
+2025-11-13 02:18:08,034 [INFO] EVENT {"event": "llm_text_outbound", "details": {"source": "proactive_prompt", "payload": {"parts": [{"text": "<truncated>"}]}}}
+2025-11-13 02:18:08,073 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,135 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,201 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,264 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,327 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,391 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,456 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,523 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,582 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,675 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,676 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:08,676 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:08,676 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:08,676 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:08,720 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,783 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,839 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,907 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:08,966 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,030 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,097 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,158 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,224 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,290 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,352 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,415 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,478 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,545 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,606 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,671 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,734 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,734 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:09,734 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 34816, "trigger": "periodic"}}
+2025-11-13 02:18:09,734 [DEBUG] Sending audio data (34816 bytes).
+2025-11-13 02:18:09,734 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 34816}}
+2025-11-13 02:18:09,800 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,867 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,928 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:09,992 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,014 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:10,059 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,065 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22539}}
+2025-11-13 02:18:10,088 [DEBUG] Sending image data (22539 bytes).
+2025-11-13 02:18:10,088 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22539}}
+2025-11-13 02:18:10,121 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,182 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,249 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,313 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,378 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,440 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,506 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,567 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,632 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,698 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,759 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,759 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:10,759 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:10,759 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:10,759 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:10,827 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,925 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:10,955 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,015 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,079 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,154 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,207 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,271 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,339 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,400 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,466 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,526 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,592 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,655 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,720 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,782 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,782 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:11,782 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:11,782 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:11,782 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:11,848 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,912 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:11,974 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,040 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,066 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:12,104 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,132 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22785}}
+2025-11-13 02:18:12,159 [DEBUG] Sending image data (22785 bytes).
+2025-11-13 02:18:12,159 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22785}}
+2025-11-13 02:18:12,168 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,230 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,295 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,360 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,428 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,486 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,550 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,617 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,679 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,745 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,810 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,811 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:12,811 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:12,811 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:12,811 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:12,872 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,937 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:12,998 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,066 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,141 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,194 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,257 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,323 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,385 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,452 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,511 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,576 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,643 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,703 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,769 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,830 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,830 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:13,830 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:13,830 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:13,830 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:13,896 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:13,963 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,023 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,088 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,139 [DEBUG] Capturing camera frame.
+2025-11-13 02:18:14,154 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,194 [INFO] EVENT {"event": "camera_frame_captured", "details": {"size": 22638}}
+2025-11-13 02:18:14,216 [DEBUG] Sending image data (22638 bytes).
+2025-11-13 02:18:14,216 [INFO] EVENT {"event": "image_blob_sent", "details": {"bytes": 22638}}
+2025-11-13 02:18:14,217 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,278 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,345 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,407 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,470 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,577 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,602 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,662 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,729 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,794 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,859 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,859 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:14,859 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:14,859 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:14,859 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:14,921 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:14,983 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,049 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,112 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,178 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,243 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,302 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,369 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,435 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,496 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,559 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,632 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,689 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,788 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,814 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,880 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:15,880 [DEBUG] Periodic send (ambient).
+2025-11-13 02:18:15,880 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768, "trigger": "periodic"}}
+2025-11-13 02:18:15,881 [DEBUG] Sending audio data (32768 bytes).
+2025-11-13 02:18:15,881 [INFO] EVENT {"event": "audio_blob_sent", "details": {"bytes": 32768}}
+2025-11-13 02:18:15,951 [INFO] EVENT {"event": "audio_chunk_read", "details": {"bytes": 2048, "can_send": true, "ai_speaking": false, "delay_remaining": 0.0}}
+2025-11-13 02:18:16,183 [DEBUG] Starting cleanup.
+2025-11-13 02:18:16,183 [INFO] EVENT {"event": "cleanup_started", "details": {}}
+2025-11-13 02:18:16,381 [DEBUG] KeyboardInterrupt received. Shutting down.
+2025-11-13 02:18:16,381 [INFO] EVENT {"event": "keyboard_interrupt", "details": {}}
+2025-11-13 02:18:16,381 [DEBUG] Application finished.
+2025-11-13 02:18:16,381 [INFO] EVENT {"event": "application_finished", "details": {}}
